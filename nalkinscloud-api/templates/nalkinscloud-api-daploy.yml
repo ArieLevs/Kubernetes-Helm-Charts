@@ -1,0 +1,58 @@
+{{- $fullName := include "nalkinscloud-api.fullname" . -}}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ $fullName }}
+  labels:
+    app: {{ template "nalkinscloud-api.name" . }}
+    chart: {{ template "nalkinscloud-api.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ $fullName }}
+    spec:
+      containers:
+        - name: {{ $fullName }}
+          image: "{{ .Values.deployment.image.repository}}:{{ .Values.deployment.image.tag}}"
+          imagePullPolicy: {{ .Values.deployment.image.imagePullPolicy }}
+          env:
+            - name: db_name
+              valueFrom:
+                configMapKeyRef:
+                  name: nalkinscloud-api-config-map
+                  key: db_name
+            - name: {{ .Values.deployment.env.databsePasswordKey }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.database.databaseSecretName }}
+                  key: {{ .Values.deployment.env.databsePasswordKey }}
+            - name: {{ .Values.deployment.env.databseUsernameKey }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.database.databaseSecretName }}
+                  key: {{ .Values.deployment.env.databseUsernameKey }}
+            - name: db_host
+              valueFrom:
+                configMapKeyRef:
+                  name: nalkinscloud-api-config-map
+                  key: db_host
+            - name: env
+              valueFrom:
+                configMapKeyRef:
+                  name: nalkinscloud-api-config-map
+                  key: env
+            - name: static_root
+              valueFrom:
+                configMapKeyRef:
+                  name: nalkinscloud-api-config-map
+                  key: static_root
+          ports:
+            - containerPort: 8000
+      {{- if .Values.deployment.image.privateRepo }}
+      imagePullSecrets:
+        - name: {{ .Values.secrets.docker.dockerSecretName }}
+      {{- end }}

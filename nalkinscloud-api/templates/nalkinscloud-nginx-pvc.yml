@@ -1,0 +1,16 @@
+{{- $fullName := include "nalkinscloud-api.fullname" . -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $fullName }}
+  labels:
+    app: {{ template "nalkinscloud-api.name" . }}
+    chart: {{ template "nalkinscloud-api.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 10Gi

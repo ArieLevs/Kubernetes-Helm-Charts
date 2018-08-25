@@ -1,0 +1,43 @@
+{{- $fullName := include "nalkinscloud-api.fullname" . -}}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ $fullName }}-nginx
+  labels:
+    app: {{ template "nalkinscloud-api.name" . }}-nginx
+    chart: {{ template "nalkinscloud-api.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.nginx.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ $fullName }}-nginx
+    spec:
+      containers:
+        - name: {{ $fullName }}-nginx
+          image: "{{ .Values.nginx.image.repository}}:{{ .Values.nginx.image.tag}}"
+          imagePullPolicy: {{ .Values.nginx.image.imagePullPolicy }}
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-server-conf
+              mountPath: /etc/nginx/conf.d
+            - name: nginx-static-pvc
+              mountPath: {{ .Values.nginx.configs.staticRoot }}
+      volumes:
+        - name: nginx-server-conf
+          configMap:
+            name: nginx-config
+#            items:
+#              - key: conf
+#                path: nginx.conf
+        - name: nginx-static-pvc
+          persistentVolumeClaim:
+            claimName: {{ $fullName }}
+#      {{- if .Values.nginx.image.privateRepo }}
+#      imagePullSecrets:
+#        - name: {{ .Values.secrets.docker.dockerSecretName }}
+#      {{- end }}
+

@@ -1,0 +1,86 @@
+# Default values for airflow.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+deployment:
+  replicaCount: 1
+  image:
+    privateRepo: true
+    repository: docker.nalkins.cloud/nalkinscloud/nalkinscloud-django
+    tag: latest
+    imagePullPolicy: Always
+  env:
+    databseUsernameKey: db_user
+    databsePasswordKey: db_pass
+
+environment: alpha
+
+nginx:
+  replicaCount: 1
+  image:
+    privateRepo: false
+    repository: nginx
+    tag: alpine
+    imagePullPolicy: IfNotPresent
+  configs:
+    staticRoot: /static/
+    serverName: alpha.nalkins.cloud
+
+secrets:
+  docker:
+    dockerSecretName: nalkinscloud-nexus-docker
+    registry: docker.nalkins.cloud
+    username:
+    password:
+  database:
+    databaseSecretName: nalkinscloud-api-database
+    username:
+    password:
+
+configmap:
+  databaseVars:
+    db_name: django
+    db_user: django
+    db_host: centraldb.nalkins.cloud
+
+service:
+  type: ClusterIP
+  port: 443
+
+ingress:
+  enabled: true
+  ingressServiceName: nalkinscloud-api-nginx
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+    certmanager.k8s.io/cluster-issuer: letsencrypt-production
+    kubernetes.io/ingress.class: "nginx"
+  path: /
+  hosts:
+    - alpha.nalkins.cloud
+  tls:
+    - secretName: nalkins-cloud-tls
+      hosts:
+        - alpha.nalkins.cloud
+
+persistent:
+  capacity:
+    storage: 50Gi
+  nfs:
+    server:
+    path:
+
+resources: {}
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
