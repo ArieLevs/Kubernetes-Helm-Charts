@@ -3,7 +3,28 @@ entries:
   nalkinscloud-api:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2018-08-25T22:55:15.209492615+03:00
+    created: 2018-08-26T22:47:01.900009392+03:00
+    description: Open source IOT framwork
+    digest: 6aea7d2b6a44d64571418f35a6056a98ed20487499aaca27a2a3630581778df9
+    engine: gotpl
+    home: https://www.nalkins.cloud
+    keywords:
+    - nalkinscloud
+    - iot
+    - django
+    maintainers:
+    - email: levinsonarie@gmail.com
+      name: Arie Lev
+      url: https://www.nalkins.cloud
+    name: nalkinscloud-api
+    sources:
+    - https://github.com/ArieLevs/NalkinsCloud
+    urls:
+    - nalkinscloud-api-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v1
+    appVersion: 0.0.1
+    created: 2018-08-26T22:47:01.89943354+03:00
     description: Open source IOT framwork
     digest: 4c4771244ed137aee0d9db2ce30ab8169494cb10676ffeadd519b570ea7b0a4f
     engine: gotpl
@@ -22,4 +43,4 @@ entries:
     urls:
     - nalkinscloud-api-0.0.4.tgz
     version: 0.0.4
-generated: 2018-08-25T22:55:15.208406769+03:00
+generated: 2018-08-26T22:47:01.89841498+03:00
