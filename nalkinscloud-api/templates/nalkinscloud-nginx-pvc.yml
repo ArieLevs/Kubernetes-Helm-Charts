@@ -1,3 +1,4 @@
+{{ if .Values.persistent.nfs.enabled }}
 {{- $fullName := include "nalkinscloud-api.fullname" . -}}
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -14,3 +15,4 @@ spec:
   resources:
     requests:
       storage: 10Gi
+{{ end }}

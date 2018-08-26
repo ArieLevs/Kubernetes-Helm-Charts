@@ -52,7 +52,7 @@ spec:
                   key: static_root
           ports:
             - containerPort: 8000
-      {{- if .Values.deployment.image.privateRepo }}
+      {{ if .Values.deployment.image.privateRepo }}
       imagePullSecrets:
         - name: {{ .Values.secrets.docker.dockerSecretName }}
-      {{- end }}
+      {{ end }}

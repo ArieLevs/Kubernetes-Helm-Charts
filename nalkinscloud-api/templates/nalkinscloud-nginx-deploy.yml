@@ -24,8 +24,10 @@ spec:
           volumeMounts:
             - name: nginx-server-conf
               mountPath: /etc/nginx/conf.d
+            {{- if .Values.persistent.enabled }}
             - name: nginx-static-pvc
               mountPath: {{ .Values.nginx.configs.staticRoot }}
+            {{- end }}
       volumes:
         - name: nginx-server-conf
           configMap:
@@ -33,11 +35,18 @@ spec:
 #            items:
 #              - key: conf
 #                path: nginx.conf
+        {{- if .Values.persistent.enabled }}
         - name: nginx-static-pvc
+          {{- if .Values.persistent.nfs.enabled }}
           persistentVolumeClaim:
             claimName: {{ $fullName }}
-#      {{- if .Values.nginx.image.privateRepo }}
-#      imagePullSecrets:
-#        - name: {{ .Values.secrets.docker.dockerSecretName }}
-#      {{- end }}
-
+          {{- else if .Values.persistent.local.enabled }}
+          hostPath:
+            path: /tmp/staticfiles
+            type: DirectoryOrCreate
+          {{- end }}
+        {{- end }}
+      {{ if .Values.nginx.image.privateRepo }}
+      imagePullSecrets:
+        - name: {{ .Values.secrets.docker.dockerSecretName }}
+      {{ end }}

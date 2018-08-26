@@ -69,7 +69,7 @@ data:
     #http {
         # Buffer log writes to speed up IO, or disable them altogether
         #access_log /var/log/nginx/access.log main buffer=16k;
-        access_log on;
+        #access_log on;
         #include       mime.types;
         #default_type  application/octet-stream;
 
@@ -97,11 +97,12 @@ data:
             #listen       443 ssl;
             server_name {{ .Values.nginx.configs.serverName }};
 
+            error_log /dev/stdout debug;
 
             #ssl_certificate     /etc/nginx/pki/server.crt;
             #ssl_certificate_key /etc/nginx/pki/server.key;
 
-            #location = /favicon.ico { access_log off; log_not_found off; }
+            location = /favicon.ico { access_log off; log_not_found off; }
 
             location /static/ {
                 autoindex on;

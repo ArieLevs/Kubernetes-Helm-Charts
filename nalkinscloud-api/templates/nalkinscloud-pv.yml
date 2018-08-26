@@ -1,3 +1,4 @@
+{{- if .Values.persistent.nfs.enabled -}}
 {{- $fullName := include "nalkinscloud-api.fullname" . -}}
 apiVersion: v1
 kind: PersistentVolume
@@ -24,3 +25,4 @@ spec:
     path: {{ .Values.persistent.nfs.path }}
     server: {{ .Values.persistent.nfs.server }}
     readOnly: true
+{{- end -}}
