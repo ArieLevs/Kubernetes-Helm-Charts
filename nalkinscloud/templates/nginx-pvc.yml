@@ -1,12 +1,12 @@
 {{ if .Values.persistent.nfs.enabled }}
-{{- $fullName := include "nalkinscloud-api.fullname" . -}}
+{{- $fullName := include "nalkinscloud.fullname" . -}}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ $fullName }}
   labels:
-    app: {{ template "nalkinscloud-api.name" . }}
-    chart: {{ template "nalkinscloud-api.chart" . }}
+    app: {{ template "nalkinscloud.name" . }}
+    chart: {{ template "nalkinscloud.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:

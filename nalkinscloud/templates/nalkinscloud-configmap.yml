@@ -1,10 +1,9 @@
-{{- $fullName := include "nalkinscloud-api.fullname" . -}}
+{{- $fullName := include "nalkinscloud.fullname" . -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nalkinscloud-api-config-map
+  name: nalkinscloud-config-map
 data:
-  env: {{ .Values.environment | quote }}
   static_root: "{{ $fullName }}-nginx.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}/static"
 {{- range $key, $value := .Values.configmap.databaseVars }}
   {{ $key }}: {{ $value | quote }}

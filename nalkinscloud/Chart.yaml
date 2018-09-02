@@ -12,7 +12,7 @@ maintainers:
 - email: levinsonarie@gmail.com
   name: Arie Lev
   url: https://www.nalkins.cloud
-name: nalkinscloud-api
+name: nalkinscloud
 sources:
 - https://github.com/ArieLevs/NalkinsCloud
 version: 0.0.5

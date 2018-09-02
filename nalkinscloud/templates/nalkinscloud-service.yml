@@ -1,11 +1,11 @@
-{{- $fullName := include "nalkinscloud-api.fullname" . -}}
+{{- $fullName := include "nalkinscloud.fullname" . -}}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ $fullName }}
   labels:
-    app: {{ template "nalkinscloud-api.name" . }}
-    chart: {{ template "nalkinscloud-api.chart" . }}
+    app: {{ template "nalkinscloud.name" . }}
+    chart: {{ template "nalkinscloud.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -13,6 +13,6 @@ spec:
   selector:
     app: {{ $fullName }}
   ports:
-  - name: nalkinscloud-api
+  - name: nalkinscloud
     port: {{ .Values.service.port }}
     targetPort: 8000

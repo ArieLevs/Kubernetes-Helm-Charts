@@ -1,0 +1,75 @@
+{{- $fullName := include "nalkinscloud.fullname" . -}}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ $fullName }}
+  labels:
+    app: {{ template "nalkinscloud.name" . }}
+    chart: {{ template "nalkinscloud.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ $fullName }}
+    spec:
+      containers:
+        - name: {{ $fullName }}
+          image: "{{ .Values.deployment.image.repository}}:{{ .Values.deployment.image.tag}}"
+          imagePullPolicy: {{ .Values.deployment.image.imagePullPolicy }}
+          env:
+            - name: db_pass
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: db_pass
+            - name: db_user
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: db_user
+            - name: django_secret_key
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: django_secret_key
+            - name: email_username
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: email_username
+            - name: email_password
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: email_password
+
+            {{- range $key, $value := .Values.deployment.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+
+            - name: db_host
+              valueFrom:
+                configMapKeyRef:
+                  name: nalkinscloud-config-map
+                  key: db_host
+            - name: db_name
+              valueFrom:
+                configMapKeyRef:
+                  name: nalkinscloud-config-map
+                  key: db_name
+            - name: static_root
+              valueFrom:
+                configMapKeyRef:
+                  name: nalkinscloud-config-map
+                  key: static_root
+
+          ports:
+            - containerPort: 8000
+      {{ if .Values.deployment.image.privateRepo }}
+      imagePullSecrets:
+        - name: {{ .Values.secrets.docker.dockerSecretName }}
+      {{ end }}

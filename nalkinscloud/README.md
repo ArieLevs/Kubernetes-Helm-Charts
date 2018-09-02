@@ -1,9 +1,9 @@
 
-Deploy nalkinscloud-api from local path
+Deploy nalkinscloud from local path
 
 ```bash
-helm upgrade nalkinscloud-api --install ./ \
-    --namespace nalkinscloud-api \
+helm upgrade nalkinscloud --install ./ \
+    --namespace nalkinscloud \
     --set secrets.docker.username=[DOCKER_USERNAME] \
     --set secrets.docker.password=[DOCKER_PASSWORD] \
     --set secrets.database.username=[DB_USERNAME] \
