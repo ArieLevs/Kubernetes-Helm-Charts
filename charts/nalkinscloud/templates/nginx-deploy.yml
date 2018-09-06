@@ -1,0 +1,53 @@
+{{- $fullName := include "nalkinscloud.fullname" . -}}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ $fullName }}-nginx
+  labels:
+    app: {{ template "nalkinscloud.name" . }}-nginx
+    chart: {{ template "nalkinscloud.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.nginx.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ $fullName }}-nginx
+    spec:
+      containers:
+        - name: {{ $fullName }}-nginx
+          image: "{{ .Values.nginx.image.repository}}:{{ .Values.nginx.image.tag}}"
+          imagePullPolicy: {{ .Values.nginx.image.imagePullPolicy }}
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-server-conf
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+            - name: nginx-server-conf
+              mountPath: /etc/nginx/nginx.conf
+              subPath: server.conf
+            {{- if .Values.persistent.enabled }}
+            - name: nginx-static-pvc
+              mountPath: {{ .Values.nginx.configs.staticRoot }}
+            {{- end }}
+      volumes:
+        - name: nginx-server-conf
+          configMap:
+            name: nginx-config
+        {{- if .Values.persistent.enabled }}
+        - name: nginx-static-pvc
+          {{- if .Values.persistent.nfs.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ $fullName }}
+          {{- else if .Values.persistent.local.enabled }}
+          hostPath:
+            path: /tmp/staticfiles
+            type: DirectoryOrCreate
+          {{- end }}
+        {{- end }}
+      {{ if .Values.nginx.image.privateRepo }}
+      imagePullSecrets:
+        - name: {{ .Values.secrets.docker.dockerSecretName }}
+      {{ end }}

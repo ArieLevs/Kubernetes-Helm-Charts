@@ -1,0 +1,18 @@
+{{- $fullName := include "nalkinscloud.fullname" . -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $fullName }}-{{ .Values.ingress.ingressServiceName }}
+  labels:
+    app: {{ template "nalkinscloud.name" . }}
+    chart: {{ template "nalkinscloud.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ $fullName }}-nginx
+  ports:
+  - name: http
+    port: {{ .Values.service.port }}
+    targetPort: 80

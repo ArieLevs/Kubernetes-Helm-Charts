@@ -1,0 +1,28 @@
+{{- if .Values.persistent.nfs.enabled -}}
+{{- $fullName := include "nalkinscloud.fullname" . -}}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ $fullName }}-pv
+  labels:
+    app: {{ template "nalkinscloud.name" . }}
+    chart: {{ template "nalkinscloud.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    pv.beta.kubernetes.io/gid: "0"
+spec:
+  capacity:
+    storage: {{ .Values.persistent.capacity.storage }}
+  accessModes:
+    - ReadOnlyMany
+  # indicates that the volume will be preserved after the pods accessing it terminates
+  persistentVolumeReclaimPolicy: Retain
+#  claimRef:
+#    namespace: nalkinscloud
+#    name: nalkinscloud
+  nfs:
+    path: {{ .Values.persistent.nfs.path }}
+    server: {{ .Values.persistent.nfs.server }}
+    readOnly: true
+{{- end -}}
