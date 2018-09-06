@@ -3,7 +3,28 @@ entries:
   nalkinscloud:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2018-09-06T21:01:54.643027704+03:00
+    created: 2018-09-06T21:16:55.759345481+03:00
+    description: Open source IOT framwork
+    digest: 73d74402f8f701e4c3a794da84b97bbfa1ab7ef450f83fbf75e923497e607c3b
+    engine: gotpl
+    home: https://www.nalkins.cloud
+    keywords:
+    - nalkinscloud
+    - iot
+    - django
+    maintainers:
+    - email: levinsonarie@gmail.com
+      name: Arie Lev
+      url: https://www.nalkins.cloud
+    name: nalkinscloud
+    sources:
+    - https://github.com/ArieLevs/NalkinsCloud
+    urls:
+    - nalkinscloud-0.0.7.tgz
+    version: 0.0.7
+  - apiVersion: v1
+    appVersion: 0.0.1
+    created: 2018-09-06T21:16:55.758755002+03:00
     description: Open source IOT framwork
     digest: 62726f1f69a76e2273886c477fad2b3ddbd205dce1713467177f072cb67c6fea
     engine: gotpl
@@ -25,7 +46,7 @@ entries:
   nalkinscloud-api:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2018-09-06T21:01:54.644277959+03:00
+    created: 2018-09-06T21:16:55.760727397+03:00
     description: Open source IOT framwork
     digest: 6aea7d2b6a44d64571418f35a6056a98ed20487499aaca27a2a3630581778df9
     engine: gotpl
@@ -46,7 +67,7 @@ entries:
     version: 0.0.5
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2018-09-06T21:01:54.643640512+03:00
+    created: 2018-09-06T21:16:55.760053178+03:00
     description: Open source IOT framwork
     digest: 4c4771244ed137aee0d9db2ce30ab8169494cb10676ffeadd519b570ea7b0a4f
     engine: gotpl
@@ -65,4 +86,4 @@ entries:
     urls:
     - nalkinscloud-api-0.0.4.tgz
     version: 0.0.4
-generated: 2018-09-06T21:01:54.64203473+03:00
+generated: 2018-09-06T21:16:55.757769976+03:00
