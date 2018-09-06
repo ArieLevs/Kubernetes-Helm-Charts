@@ -1,7 +1,0 @@
-
-Nalkinscloud API is available at:
-
-{{- range .Values.ingress.hosts }}
-  https://{{ . }}{{ $.Values.ingress.path }}
-{{- end }}
-
