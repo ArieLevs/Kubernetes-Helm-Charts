@@ -14,10 +14,10 @@ deployment:
     version: null
     backend_domain: https://api-alpha.nalkins.cloud
     frontend_domain: https://alpha.nalkins.cloud
-    graylogHost:
-    graylogPort:
-    emailHost:
-    emailPort:
+    graylog_host:
+    graylog_port:
+    email_host:
+    email_port:
 
 nginx:
   replicaCount: 2
