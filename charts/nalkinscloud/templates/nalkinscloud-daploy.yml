@@ -51,21 +51,13 @@ spec:
               value: {{ $value | quote }}
             {{- end }}
 
-            - name: db_host
+            {{- range $key, $value := .Values.configmap.databaseVars }}
+            - name: {{ $key }}
               valueFrom:
                 configMapKeyRef:
-                  name: nalkinscloud-config-map
-                  key: db_host
-            - name: db_name
-              valueFrom:
-                configMapKeyRef:
-                  name: nalkinscloud-config-map
-                  key: db_name
-            - name: static_root
-              valueFrom:
-                configMapKeyRef:
-                  name: nalkinscloud-config-map
-                  key: static_root
+                  name: {{ $fullName }}-config-map
+                  key: {{ $key }}
+            {{- end }}
 
           ports:
             - containerPort: 8000

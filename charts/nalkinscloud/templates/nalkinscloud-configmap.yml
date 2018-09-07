@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nalkinscloud-config-map
+  name: {{ $fullName }}-config-map
 data:
   static_root: "{{ $fullName }}-nginx.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}/static"
 {{- range $key, $value := .Values.configmap.databaseVars }}

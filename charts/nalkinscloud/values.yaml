@@ -48,6 +48,7 @@ secrets:
 
 configmap:
   databaseVars:
+    # Key also used as env name inside project
     db_name: django
     db_user: django
     db_host: centraldb.nalkins.cloud
