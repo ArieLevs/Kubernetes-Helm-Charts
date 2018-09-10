@@ -8,6 +8,8 @@ Install Helm
 download [Helm](https://github.com/kubernetes/helm/releases)  
 `wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz`
 
+And install, [follow instructions](https://github.com/helm/helm/blob/master/docs/install.md)
+
 Add nalkinscloud repository  
 ```bash
 helm repo add nalkinscloud https://arielevs.github.io/Kubernetes-Helm-Charts/  
