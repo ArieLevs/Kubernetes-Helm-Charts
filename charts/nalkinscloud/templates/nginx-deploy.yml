@@ -43,7 +43,7 @@ spec:
             claimName: {{ $fullName }}
           {{- else if .Values.persistent.local.enabled }}
           hostPath:
-            path: /tmp/staticfiles
+            path: {{ .Values.persistent.local.path }}
             type: DirectoryOrCreate
           {{- end }}
         {{- end }}

@@ -85,6 +85,7 @@ persistent:
     path:
   local:
     enabled: false
+    path: /tmp/staticfiles
 
 resources: {}
   # limits:
