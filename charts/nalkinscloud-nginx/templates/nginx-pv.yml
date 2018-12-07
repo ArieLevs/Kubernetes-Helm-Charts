@@ -1,0 +1,56 @@
+
+{{- if .Values.persistent.enabled -}}
+{{- $fullName := include "nalkinscloud-nginx.fullname" . -}}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ $fullName }}-frontend-api-pv
+  labels:
+    app: {{ template "nalkinscloud-nginx.name" . }}
+    chart: {{ template "nalkinscloud-nginx.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    pv.beta.kubernetes.io/gid: "0"
+spec:
+  capacity:
+    storage: {{ .Values.persistent.frontendApi.capacity.storage }}
+  accessModes:
+    - ReadOnlyMany
+  # indicates that the volume will be preserved after the pods accessing it terminates
+  persistentVolumeReclaimPolicy: Retain
+#  claimRef:
+#    namespace: nalkinscloud
+#    name: nalkinscloud
+  nfs:
+    path: {{ .Values.persistent.frontendApi.nfs.path }}
+    server: {{ .Values.persistent.frontendApi.nfs.server }}
+    readOnly: true
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ $fullName }}-resume-pv
+  labels:
+    app: {{ template "nalkinscloud-nginx.name" . }}
+    chart: {{ template "nalkinscloud-nginx.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    pv.beta.kubernetes.io/gid: "0"
+spec:
+  capacity:
+    storage: {{ .Values.persistent.resume.capacity.storage }}
+  accessModes:
+    - ReadOnlyMany
+  # indicates that the volume will be preserved after the pods accessing it terminates
+  persistentVolumeReclaimPolicy: Retain
+#  claimRef:
+#    namespace: nalkinscloud
+#    name: nalkinscloud
+  nfs:
+    path: {{ .Values.persistent.resume.nfs.path }}
+    server: {{ .Values.persistent.resume.nfs.server }}
+    readOnly: true
+{{- end -}}

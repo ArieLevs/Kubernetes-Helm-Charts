@@ -1,0 +1,147 @@
+{{- $fullName := include "nalkinscloud-nginx.fullname" . -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  nalkinscloud-api.conf: |
+    upstream nalkinscloud_api_backend{
+        server {{ .Values.configmap.nalkinscloudApi.serviceName }}.{{ .Values.configmap.nalkinscloudApi.namespace }}.svc.cluster.local:{{ .Values.configmap.nalkinscloudApi.servicePort }};
+    }
+
+    server {
+        listen       80;
+        #listen       443 ssl;
+        server_name {{ .Values.configmap.nalkinscloudApi.serverName }};
+
+        error_log /dev/stdout debug;
+
+        #ssl_certificate     /etc/nginx/pki/server.crt;
+        #ssl_certificate_key /etc/nginx/pki/server.key;
+
+        location = /favicon.ico { access_log off; log_not_found off; }
+
+        location /static/ {
+            autoindex on;
+            alias {{ .Values.configmap.nalkinscloudApi.staticRoot }};
+        }
+
+        location / {
+            autoindex on;
+            try_files $uri @proxy;
+        }
+
+        location @proxy {
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_X_forwarded_for;
+            proxy_set_header Host $host;
+
+            proxy_pass http://nalkinscloud_api_backend;
+
+        }
+    }
+  nalkinscloud-frontend.conf: |
+    upstream nalkinscloud_frontend_backend{
+        server {{ .Values.configmap.nalkinscloudFrontend.serviceName }}.{{ .Values.configmap.nalkinscloudFrontend.namespace }}.svc.cluster.local:{{ .Values.configmap.nalkinscloudFrontend.servicePort }};
+    }
+
+    server {
+        listen       80;
+        #listen       443 ssl;
+        server_name {{ .Values.configmap.nalkinscloudFrontend.serverName }};
+
+        error_log /dev/stdout debug;
+
+        #ssl_certificate     /etc/nginx/pki/server.crt;
+        #ssl_certificate_key /etc/nginx/pki/server.key;
+
+        location = /favicon.ico { access_log off; log_not_found off; }
+
+        location /static/ {
+            autoindex on;
+            alias {{ .Values.configmap.nalkinscloudFrontend.staticRoot }};
+        }
+
+        location / {
+            autoindex on;
+            try_files $uri @proxy;
+        }
+
+        location @proxy {
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_X_forwarded_for;
+            proxy_set_header Host $host;
+
+            proxy_pass http://nalkinscloud_frontend_backend;
+
+        }
+    }
+  nalkinscloud-resume.conf: |
+    upstream nalkinscloud_resume_backend{
+        server {{ .Values.configmap.nalkinscloudResume.serviceName }}.{{ .Values.configmap.nalkinscloudResume.namespace }}.svc.cluster.local:{{ .Values.configmap.nalkinscloudResume.servicePort }};
+    }
+
+    server {
+        listen       80;
+        #listen       443 ssl;
+        server_name {{ .Values.configmap.nalkinscloudResume.serverName }};
+
+        error_log /dev/stdout debug;
+
+        #ssl_certificate     /etc/nginx/pki/server.crt;
+        #ssl_certificate_key /etc/nginx/pki/server.key;
+
+        location = /favicon.ico { access_log off; log_not_found off; }
+
+        location /static/ {
+            autoindex on;
+            alias {{ .Values.configmap.nalkinscloudResume.staticRoot }};
+        }
+
+        location / {
+            autoindex on;
+            try_files $uri @proxy;
+        }
+
+        location @proxy {
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_X_forwarded_for;
+            proxy_set_header Host $host;
+
+            proxy_pass http://nalkinscloud_resume_backend;
+
+        }
+    }
+  nginx.conf: |
+    user  nginx;
+    worker_processes auto;
+
+    error_log  /var/log/nginx/error.log warn;
+    pid        /var/run/nginx.pid;
+
+    events {
+        worker_connections  1024;
+    }
+
+
+    http {
+        include       /etc/nginx/mime.types;
+        default_type  application/octet-stream;
+
+        log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                          '$status $body_bytes_sent "$http_referer" '
+                          '"$http_user_agent" "$http_x_forwarded_for"';
+
+        access_log  /var/log/nginx/access.log  main;
+
+        sendfile            on;
+        #tcp_nopush         on;
+        tcp_nodelay         on;
+        keepalive_timeout   65;
+        types_hash_max_size 2048;
+        #gzip               on;
+
+        include /etc/nginx/conf.d/*.conf;
+
+        send_timeout 2;
+    }

@@ -1,5 +1,5 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "nalkinscloud.fullname" . -}}
+{{- $fullName := include "nalkinscloud-nginx.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
 {{- $ingressPort := .Values.service.port -}}
 {{- $ingressServiceName := .Values.ingress.ingressServiceName -}}
@@ -8,8 +8,8 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    app: {{ template "nalkinscloud.name" . }}
-    chart: {{ template "nalkinscloud.chart" . }}
+    app: {{ template "nalkinscloud-nginx.name" . }}
+    chart: {{ template "nalkinscloud-nginx.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
   annotations:
@@ -34,7 +34,7 @@ spec:
         paths:
         - path: {{ $ingressPath }}
           backend:
-            serviceName: {{ $fullName }}-{{ $ingressServiceName }}
+            serviceName: {{ $fullName }}
             servicePort: {{ $ingressPort }}
   {{- end }}
 {{- end }}

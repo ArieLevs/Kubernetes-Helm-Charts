@@ -1,0 +1,93 @@
+# Default values for airflow.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nginx:
+  replicaCount: 2
+  image:
+    privateRepo: false
+    repository: nginx
+    tag: alpine
+    imagePullPolicy: IfNotPresent
+
+configmap:
+  nalkinscloudApi:
+    serviceName: nalkinscloud-api
+    servicePort: 443
+    namespace: nalkinscloud-api
+    serverName: api-alpha.nalkins.cloud
+    staticRoot: /static/nalkinscloud_api/
+  nalkinscloudFrontend:
+    serviceName: nalkinscloud-frontend
+    servicePort: 443
+    namespace: nalkinscloud-frontend
+    serverName: alpha.nalkins.cloud
+    staticRoot: /static/nalkinscloud_frontend/
+  nalkinscloudResume:
+    serviceName: nalkinscloud-resume
+    servicePort: 443
+    namespace: nalkinscloud-resume
+    serverName: resume-alpha.nalkins.cloud
+    staticRoot: /static/nalkinscloud_resume/
+
+service:
+  type: ClusterIP
+  port: 443
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+    certmanager.k8s.io/cluster-issuer: letsencrypt-production
+    kubernetes.io/ingress.class: "nginx"
+  path: /
+  hosts:
+    - api-alpha.nalkins.cloud
+    - alpha.nalkins.cloud
+    - resume-alpha.nalkins.cloud
+  tls:
+    - secretName: nalkins-cloud-tls
+      hosts:
+        - api-alpha.nalkins.cloud
+        - alpha.nalkins.cloud
+        - resume-alpha.nalkins.cloud
+
+persistent:
+  enabled: true
+
+  frontendApi:
+    capacity:
+      storage: 50Gi
+    nfs:
+      enabled: true
+      server:
+      path:
+    local:
+      enabled: false
+      path: /tmp/staticfiles
+  resume:
+    capacity:
+      storage: 50Gi
+    nfs:
+      enabled: true
+      server:
+      path:
+    local:
+      enabled: false
+      path: /tmp/staticfiles
+
+resources: {}
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

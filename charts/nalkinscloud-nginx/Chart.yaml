@@ -1,0 +1,18 @@
+apiVersion: v1
+appVersion: 0.1.0
+description: Nginx proxy for nalkinscloud project
+engine: gotpl
+home: https://www.nalkins.cloud
+icon: null
+keywords:
+- nalkinscloud
+- nginx
+- proxy
+maintainers:
+- email: levinsonarie@gmail.com
+  name: Arie Lev
+  url: https://www.nalkins.cloud
+name: nalkinscloud-nginx
+sources:
+- https://github.com/ArieLevs/NalkinsCloud
+version: 0.1.0

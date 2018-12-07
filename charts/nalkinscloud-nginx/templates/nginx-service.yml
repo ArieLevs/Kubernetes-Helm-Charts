@@ -1,17 +1,17 @@
-{{- $fullName := include "nalkinscloud.fullname" . -}}
+{{- $fullName := include "nalkinscloud-nginx.fullname" . -}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ $fullName }}-{{ .Values.ingress.ingressServiceName }}
+  name: {{ $fullName }}
   labels:
-    app: {{ template "nalkinscloud.name" . }}
-    chart: {{ template "nalkinscloud.chart" . }}
+    app: {{ template "nalkinscloud-nginx.name" . }}
+    chart: {{ template "nalkinscloud-nginx.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   type: {{ .Values.service.type }}
   selector:
-    app: {{ $fullName }}-nginx
+    app: {{ $fullName }}
   ports:
   - name: http
     port: {{ .Values.service.port }}

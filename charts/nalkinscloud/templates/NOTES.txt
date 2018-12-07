@@ -1,10 +1,8 @@
+{{- $fullName := include "nalkinscloud.fullname" . -}}
 
 Version Deployed:
 {{ .Values.deployment.env.version }}
 
 Nalkinscloud is available at:
 
-{{- range .Values.ingress.hosts }}
-  https://{{ . }}{{ $.Values.ingress.path }}
-{{- end }}
-
+{{ $fullName }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}

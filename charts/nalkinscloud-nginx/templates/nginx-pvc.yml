@@ -1,0 +1,39 @@
+{{- $fullName := include "nalkinscloud-nginx.fullname" . -}}
+{{ if .Values.persistent.frontendApi.nfs.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $fullName }}-frontend-api
+  labels:
+    app: {{ template "nalkinscloud-nginx.name" . }}
+    chart: {{ template "nalkinscloud-nginx.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 10Gi
+  volumeName: "{{ $fullName }}-frontend-api-pv"
+{{ end }}
+---
+
+{{ if .Values.persistent.resume.nfs.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $fullName }}-resume
+  labels:
+    app: {{ template "nalkinscloud-nginx.name" . }}
+    chart: {{ template "nalkinscloud-nginx.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 10Gi
+  volumeName: "{{ $fullName }}-resume-pv"
+{{ end }}

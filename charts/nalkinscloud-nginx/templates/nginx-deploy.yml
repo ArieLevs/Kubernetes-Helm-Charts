@@ -1,0 +1,70 @@
+{{- $fullName := include "nalkinscloud-nginx.fullname" . -}}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ $fullName }}
+  labels:
+    app: {{ template "nalkinscloud-nginx.name" . }}
+    chart: {{ template "nalkinscloud-nginx.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.nginx.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ $fullName }}
+    spec:
+      containers:
+        - name: {{ $fullName }}
+          image: "{{ .Values.nginx.image.repository}}:{{ .Values.nginx.image.tag}}"
+          imagePullPolicy: {{ .Values.nginx.image.imagePullPolicy }}
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-server-conf
+              mountPath: /etc/nginx/conf.d/nalkinscloud-resume.conf
+              subPath: nalkinscloud-resume.conf
+            - name: nginx-server-conf
+              mountPath: /etc/nginx/conf.d/nalkinscloud-api.conf
+              subPath: nalkinscloud-api.conf
+            - name: nginx-server-conf
+              mountPath: /etc/nginx/conf.d/nalkinscloud-frontend.conf
+              subPath: nalkinscloud-frontend.conf
+            - name: nginx-server-conf
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+
+            {{- if .Values.persistent.enabled }}
+            - name: nginx-static-frontend-api-pvc
+              mountPath: {{ .Values.configmap.nalkinscloudApi.staticRoot }}
+            - name: nginx-static-frontend-api-pvc
+              mountPath: {{ .Values.configmap.nalkinscloudFrontend.staticRoot }}
+            - name: nginx-static-resume-pvc
+              mountPath: {{ .Values.configmap.nalkinscloudResume.staticRoot }}
+            {{- end }}
+      volumes:
+        - name: nginx-server-conf
+          configMap:
+            name: nginx-config
+        {{- if .Values.persistent.enabled }}
+
+        - name: nginx-static-frontend-api-pvc
+          {{- if .Values.persistent.frontendApi.nfs.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ $fullName }}-frontend-api
+          {{- else if .Values.persistent.frontendApi.local.enabled }}
+          hostPath:
+            path: {{ .Values.persistent.frontendApi.local.path }}
+            type: DirectoryOrCreate
+          {{- end }}
+        - name: nginx-static-resume-pvc
+          {{- if .Values.persistent.resume.nfs.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ $fullName }}-resume
+          {{- else if .Values.persistent.resume.local.enabled }}
+          hostPath:
+            path: {{ .Values.persistent.resume.local.path }}
+            type: DirectoryOrCreate
+          {{- end }}
+        {{- end }}

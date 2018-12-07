@@ -19,17 +19,6 @@ deployment:
     email_host:
     email_port:
 
-nginx:
-  replicaCount: 2
-  image:
-    privateRepo: false
-    repository: nginx
-    tag: alpine
-    imagePullPolicy: IfNotPresent
-  configs:
-    staticRoot: /static/
-    serverName: api-alpha.nalkins.cloud
-
 secrets:
   # If blank, random 50 char secret created
   django_secret_key:
@@ -56,36 +45,6 @@ configmap:
 service:
   type: ClusterIP
   port: 443
-
-ingress:
-  enabled: true
-  ingressServiceName: nalkinscloud-nginx
-  annotations:
-    kubernetes.io/ingress.allow-http: "false"
-    ingress.kubernetes.io/ssl-redirect: "true"
-    kubernetes.io/tls-acme: "true"
-    certmanager.k8s.io/cluster-issuer: letsencrypt-production
-    kubernetes.io/ingress.class: "nginx"
-  path: /
-  hosts:
-    - api-alpha.nalkins.cloud
-  tls:
-    - secretName: nalkins-cloud-tls
-      hosts:
-        - api-alpha.nalkins.cloud
-
-persistent:
-  enabled: true
-
-  capacity:
-    storage: 50Gi
-  nfs:
-    enabled: true
-    server:
-    path:
-  local:
-    enabled: false
-    path: /tmp/staticfiles
 
 resources: {}
   # limits:
