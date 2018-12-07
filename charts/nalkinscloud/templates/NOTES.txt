@@ -2,7 +2,7 @@
 Version Deployed:
 {{ .Values.deployment.env.version }}
 
-Nalkinscloud API is available at:
+Nalkinscloud is available at:
 
 {{- range .Values.ingress.hosts }}
   https://{{ . }}{{ $.Values.ingress.path }}

@@ -4,7 +4,6 @@ kind: ConfigMap
 metadata:
   name: {{ $fullName }}-config-map
 data:
-  static_root: "{{ $fullName }}-nginx.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}/static"
 {{- range $key, $value := .Values.configmap.databaseVars }}
   {{ $key }}: {{ $value | quote }}
 {{- end }}
