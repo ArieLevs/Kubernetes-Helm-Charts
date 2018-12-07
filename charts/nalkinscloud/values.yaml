@@ -8,7 +8,7 @@ deployment:
     privateRepo: true
     repository: docker.nalkins.cloud/nalkinscloud/nalkinscloud-django-backend
     tag: latest
-    imagePullPolicy: Always
+    imagePullPolicy: IfNotPresent
   env:
     environment: alpha
     version: null
