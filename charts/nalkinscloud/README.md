@@ -1,14 +1,25 @@
 
-Deploy nalkinscloud from local path
+Make sure helm repo is up to date `helm repo update`.
+
+Mandatory parameters to deploy Nalkinscloud:
 
 ```bash
-helm upgrade nalkinscloud --install ./ \
-    --namespace nalkinscloud \
-    --set secrets.docker.username=[DOCKER_USERNAME] \
-    --set secrets.docker.password=[DOCKER_PASSWORD] \
-    --set secrets.database.username=[DB_USERNAME] \
-    --set secrets.database.password=[DB_PASSWORD] \
-    --set persistent.nfs.server=[NFS_SERVER] \
-    --set persistent.nfs.path=[NFS_SHARE_PATH] \
-    -f values.yml
+helm upgrade nalkinscloud-api \
+  --install nalkinscloud/nalkinscloud \
+  --namespace nalkinscloud-api \
+  --set deployment.env.version=[VERSION] \
+  --set deployment.env.graylog_host=[GRAYLOG_HOST] \
+  --set deployment.env.graylog_port=[GRAYLOG_PORT] \
+  --set deployment.env.email_host=[EMAIL_HOST] \
+  --set deployment.env.email_port=[EMAIL_PORT] \
+  --set secrets.docker.registry=[DOCKER_REPOSITORY] \
+  --set secrets.docker.username=[DOCKER_USERNAME] \
+  --set secrets.docker.password=[DOCKER_PASSWORD] \
+  --set configmap.databaseVars.db_name=django \
+  --set configmap.databaseVars.db_user=django \
+  --set configmap.databaseVars.db_host=[DB_HOST] \
+  --set secrets.database.username=[DB_USERNAME] \
+  --set secrets.database.password=[DB_PASSWORD] \
+  --set secrets.email.username=[EMAIL_PASSWORD] \
+  --set secrets.email.password=[EMAIL_PASSWORD]
 ```
