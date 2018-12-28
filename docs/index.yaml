@@ -3,7 +3,7 @@ entries:
   nalkinscloud:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2018-12-07T17:23:41.582241938+02:00
+    created: 2018-12-28T19:39:51.907017413+02:00
     description: Open source IOT framwork
     digest: 834aec906b726cebaaa768166020a3b74b05525d610dc3440b8c683b04ee8f93
     engine: gotpl
@@ -24,7 +24,7 @@ entries:
     version: 0.0.13
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2018-12-07T17:23:41.581731488+02:00
+    created: 2018-12-28T19:39:51.906599295+02:00
     description: Open source IOT framwork
     digest: 5a1632ae64130d74467a393f7f270066df37f24750f4364df1faa5a675ced5cc
     engine: gotpl
@@ -45,7 +45,7 @@ entries:
     version: 0.0.12
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2018-12-07T17:23:41.581203544+02:00
+    created: 2018-12-28T19:39:51.905966166+02:00
     description: Open source IOT framwork
     digest: 4f8b1a055ff200ab17b487d09c64aeb765827856fb659b05772425987941cdd5
     engine: gotpl
@@ -66,7 +66,7 @@ entries:
     version: 0.0.11
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2018-12-07T17:23:41.580659598+02:00
+    created: 2018-12-28T19:39:51.905346718+02:00
     description: Open source IOT framwork
     digest: d1cfd3a1337f9fd68ff512ed179a0710e3659be803ae01a6925ee537a7d3f962
     engine: gotpl
@@ -87,7 +87,7 @@ entries:
     version: 0.0.10
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2018-12-07T17:23:41.584488175+02:00
+    created: 2018-12-28T19:39:51.909296315+02:00
     description: Open source IOT framwork
     digest: c44cac4b28ce02715a0806f46bf7d43df8f0754aaa3824debf2326e478df7d96
     engine: gotpl
@@ -108,7 +108,7 @@ entries:
     version: 0.0.9
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2018-12-07T17:23:41.583892374+02:00
+    created: 2018-12-28T19:39:51.908719774+02:00
     description: Open source IOT framwork
     digest: 1d07cf25a1fc1a19bef15e816462e999722930e94584df1e138f9e9a17030ab2
     engine: gotpl
@@ -129,7 +129,7 @@ entries:
     version: 0.0.8
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2018-12-07T17:23:41.583301753+02:00
+    created: 2018-12-28T19:39:51.908147737+02:00
     description: Open source IOT framwork
     digest: 73d74402f8f701e4c3a794da84b97bbfa1ab7ef450f83fbf75e923497e607c3b
     engine: gotpl
@@ -150,7 +150,7 @@ entries:
     version: 0.0.7
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2018-12-07T17:23:41.582755224+02:00
+    created: 2018-12-28T19:39:51.907607296+02:00
     description: Open source IOT framwork
     digest: 62726f1f69a76e2273886c477fad2b3ddbd205dce1713467177f072cb67c6fea
     engine: gotpl
@@ -172,7 +172,28 @@ entries:
   nalkinscloud-nginx:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: 2018-12-07T17:23:41.585426138+02:00
+    created: 2018-12-28T19:39:51.910878992+02:00
+    description: Nginx proxy for nalkinscloud project
+    digest: 6a679aae654545b71d302fbcd9f6408b013b06eebd186cd27ca1ca42b51ba9fe
+    engine: gotpl
+    home: https://www.nalkins.cloud
+    keywords:
+    - nalkinscloud
+    - nginx
+    - proxy
+    maintainers:
+    - email: levinsonarie@gmail.com
+      name: Arie Lev
+      url: https://www.nalkins.cloud
+    name: nalkinscloud-nginx
+    sources:
+    - https://github.com/ArieLevs/NalkinsCloud
+    urls:
+    - nalkinscloud-nginx-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v1
+    appVersion: 0.1.0
+    created: 2018-12-28T19:39:51.910304113+02:00
     description: Nginx proxy for nalkinscloud project
     digest: b9f57727e54356605e25aa00b02a52379ff2bccd8031cae72492985d3ce900e5
     engine: gotpl
@@ -193,7 +214,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 0.1.0
-    created: 2018-12-07T17:23:41.584971449+02:00
+    created: 2018-12-28T19:39:51.909828301+02:00
     description: Nginx proxy for nalkinscloud project
     digest: a4eb4ad4d95f04a9de52b5b27d3198b669f1e5b277b91d6fa9032054d294886c
     engine: gotpl
@@ -212,4 +233,4 @@ entries:
     urls:
     - nalkinscloud-nginx-0.1.1.tgz
     version: 0.1.1
-generated: 2018-12-07T17:23:41.579679238+02:00
+generated: 2018-12-28T19:39:51.904309951+02:00
