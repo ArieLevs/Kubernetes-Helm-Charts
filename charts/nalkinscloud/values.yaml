@@ -29,8 +29,8 @@ secrets:
     username:
     password:
   database:
-    username:
-    password:
+    username: django
+    password: django
   email:
     username:
     password:

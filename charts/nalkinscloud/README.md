@@ -23,3 +23,19 @@ helm upgrade nalkinscloud-api \
   --set secrets.email.username=[EMAIL_PASSWORD] \
   --set secrets.email.password=[EMAIL_PASSWORD]
 ```
+
+Installing on local host:
+```bash
+helm upgrade nalkinscloud-api \
+  --install nalkinscloud/nalkinscloud \
+  --namespace nalkinscloud-api \
+  --set deployment.env.environment=dev \
+  --set deployment.env.version=dev \
+  --set deployment.env.email_host=[EMAIL_HOST] \
+  --set deployment.env.email_port=[EMAIL_PORT] \
+  --set secrets.docker.registry=[DOCKER_REPOSITORY] \
+  --set secrets.docker.username=[DOCKER_USERNAME] \
+  --set secrets.docker.password=[DOCKER_PASSWORD] \
+  --set secrets.email.username=[EMAIL_PASSWORD] \
+  --set secrets.email.password=[EMAIL_PASSWORD]
+```
