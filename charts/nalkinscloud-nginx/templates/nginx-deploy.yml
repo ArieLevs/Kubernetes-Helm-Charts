@@ -36,20 +36,20 @@ spec:
               subPath: nginx.conf
 
             {{- if .Values.persistent.enabled }}
-            - name: nginx-static-frontend-api-pvc
+            - name: nginx-static-frontend-api
               mountPath: {{ .Values.configmap.nalkinscloudApi.staticRoot }}
-            - name: nginx-static-frontend-api-pvc
+            - name: nginx-static-frontend-api
               mountPath: {{ .Values.configmap.nalkinscloudFrontend.staticRoot }}
-            - name: nginx-static-resume-pvc
+            - name: nginx-static-resume
               mountPath: {{ .Values.configmap.nalkinscloudResume.staticRoot }}
             {{- end }}
       volumes:
         - name: nginx-server-conf
           configMap:
             name: nginx-config
-        {{- if .Values.persistent.enabled }}
 
-        - name: nginx-static-frontend-api-pvc
+        {{- if .Values.persistent.enabled }}
+        - name: nginx-static-frontend-api
           {{- if .Values.persistent.frontendApi.nfs.enabled }}
           persistentVolumeClaim:
             claimName: {{ $fullName }}-frontend-api
@@ -58,7 +58,7 @@ spec:
             path: {{ .Values.persistent.frontendApi.local.path }}
             type: DirectoryOrCreate
           {{- end }}
-        - name: nginx-static-resume-pvc
+        - name: nginx-static-resume
           {{- if .Values.persistent.resume.nfs.enabled }}
           persistentVolumeClaim:
             claimName: {{ $fullName }}-resume

@@ -12,3 +12,17 @@ helm upgrade nalkinscloud-nginx \
     --set persistent.resume.nfs.server=[NFS_SERVER] \
     --set persistent.resume.nfs.path=[NFS_SHARE_PATH]
 ```
+
+Example for local installation:
+
+```bash
+helm upgrade nalkinscloud-nginx \
+    --install nalkinscloud/nalkinscloud-nginx \
+    --namespace nalkinscloud-nginx \
+    --set persistent.frontendApi.nfs.enabled=false \
+    --set persistent.frontendApi.nfs.local=true \
+    --set persistent.frontendApi.nfs.path=/tmp/staticfiles \
+    --set persistent.resume.nfs.enabled=false \
+    --set persistent.resume.nfs.local=true \
+    --set persistent.resume.nfs.path=/tmp/staticfiles
+```
