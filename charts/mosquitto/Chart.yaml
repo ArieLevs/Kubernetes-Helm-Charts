@@ -10,5 +10,5 @@ maintainers:
 - email: levinsonarie@gmail.com
   name: Arie Lev
 name: mosquitto
-sources:
-version: 0.0.1
+sources: null
+version: 0.0.2
