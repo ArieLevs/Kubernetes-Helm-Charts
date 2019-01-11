@@ -25,15 +25,15 @@ secrets:
 
   docker:
     dockerSecretName: nalkinscloud-nexus-docker
-    registry:
-    username:
-    password:
+    registry: url
+    username: admin
+    password: admin
   database:
     username: django
     password: django
   email:
-    username:
-    password:
+    username: admin
+    password: admin
 
 configmap:
   databaseVars:
@@ -44,7 +44,19 @@ configmap:
 
 service:
   type: ClusterIP
-  port: 443
+  port: 80
+
+ingress:
+  enabled: false
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+  path: /
+  hosts:
+    - api-alpha.nalkins.cloud
+  tls: {}
+  #  - secretName: nalkins-cloud-tls
+  #    hosts:
+  #      - nalkins.cloud
 
 resources: {}
   # limits:
@@ -59,3 +71,4 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
