@@ -1,0 +1,91 @@
+# Default values for mosquitto.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: arielev/mosquitto
+  tag: 1.5.5
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+#TODO Set allow_anonymous to false once Auth-Plug and linux alpine 3.8 to mysql backend resolved
+config: |-
+  allow_anonymous true
+
+  connection_messages true
+  log_timestamp true
+  log_type all
+  log_dest stdout
+
+  listener 1883 127.0.0.1
+  listener 8883
+  #listener 9090
+  #protocol websockets
+
+  #cafile /etc/mosquitto/certs/mosquitto_ca.crt
+  #keyfile /etc/mosquitto/certs/mosquitto_server.key
+  #certfile /etc/mosquitto/certs/mosquitto_server.crt
+  #tls_version tlsv1.1
+  #use_identity_as_username true
+
+  max_inflight_messages 1
+
+  ### Auth plug parameters - MYSQL back end ####
+  #auth_plugin /usr/local/lib/auth-plug.so
+
+  #auth_opt_backends mysql
+  ##auth_opt_redis_host
+  ##auth_opt_redis_port
+  #auth_opt_host $DB_MOSQUITTO_LOCATION
+  #auth_opt_port 3306
+  #auth_opt_dbname mosquitto
+  #auth_opt_user mosquitto
+  #auth_opt_pass $DB_MOSQUITTO_PASS
+  #auth_opt_userquery SELECT password FROM devices WHERE device_id = '%s'
+  #auth_opt_superquery SELECT COUNT(*) FROM devices WHERE device_id = '%s' AND super = 1
+  #auth_opt_aclquery SELECT topic FROM acls WHERE (device_id = '%s') AND (rw >= '%d')
+  #auth_opt_anonusername AnonymouS
+
+  #auth_opt_mysql_opt_reconnect true
+  #auth_opt_mysql_auto_reconnect true
+  #### END Auth plug parameters ####
+
+  #Allow multiple connections for same client
+  use_username_as_clientid true
+
+persistence:
+  enabled: false
+  accessMode: ReadWriteOnce
+  size: 2Gi
+  storageClass: standard
+
+service:
+  type: ClusterIP
+  mqttPort: 1883
+  mqttTLSPort: 8883
+  websocketPort: 9090
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+
+

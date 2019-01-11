@@ -1,0 +1,14 @@
+apiVersion: v1
+appVersion: 0.0.1
+description: Mosquitto MQTT Broker with Auth Plug
+engine: gotpl
+icon: null
+keywords:
+- mosquitto
+- mqtt
+maintainers:
+- email: levinsonarie@gmail.com
+  name: Arie Lev
+name: mosquitto
+sources:
+version: 0.0.1
