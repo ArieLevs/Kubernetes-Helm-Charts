@@ -1,0 +1,78 @@
+{{- $fullName := include "nalkinscloud-mqtt-simulators.fullname" . -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nalkinscloud-mqtt-simulators.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "nalkinscloud-mqtt-simulators.name" . }}
+    helm.sh/chart: {{ include "nalkinscloud-mqtt-simulators.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "nalkinscloud-mqtt-simulators.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "nalkinscloud-mqtt-simulators.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.serverCrt }}
+          volumeMounts:
+            - name: mosquitto-server-crt
+              mountPath: /src/certificates/mosquitto_server.crt
+              subPath: mosquitto_server.crt
+              readOnly: true
+          {{- end }}
+          env:
+            - name: dht_pass
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: dhtPass
+            - name: switch_pass
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: switchPass
+
+            {{- range $key, $value := .Values.envVars }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+
+            {{- if .Values.graylog.graylog_enabled -}}
+            {{- range $key, $value := .Values.graylog }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+            {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+        - name: mosquitto-server-crt
+          configMap:
+            name: {{ $fullName }}
+      {{- if .Values.secrets.docker.privateRepo }}
+      imagePullSecrets:
+        - name: {{ .Values.secrets.docker.dockerSecretName }}
+      {{- end -}}

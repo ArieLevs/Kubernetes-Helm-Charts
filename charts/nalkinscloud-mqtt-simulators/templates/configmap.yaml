@@ -1,0 +1,15 @@
+{{- $fullName := include "nalkinscloud-mqtt-simulators.fullname" . -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $fullName }}
+  labels:
+    app.kubernetes.io/name: {{ include "nalkinscloud-mqtt-simulators.name" . }}
+    helm.sh/chart: {{ include "nalkinscloud-mqtt-simulators.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  mosquitto_server.crt: |-
+{{- if .Values.serverCrt }}
+{{ .Values.serverCrt | indent 4 }}
+{{- end -}}

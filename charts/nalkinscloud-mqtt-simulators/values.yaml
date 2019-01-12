@@ -1,0 +1,61 @@
+# Default values for nalkinscloud-mqtt-simulators.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: nalkinscloud-mqtt-automation-simulators/nalkinscloud-simulators
+  tag: latest
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+envVars:
+  environment: alpha
+  broker_host: mosquitto.nalkins.cloud
+  broker_port: 8883
+  dht_user: test_dht_simulator
+  dht_topic: test_dht_simulator
+  dht_qos: 1
+  switch_user: test_switch_simulator
+  switch_topic: test_switch_simulator
+  switch_qos: 1
+
+graylog:
+  graylog_enabled: true
+  graylog_host: graylog.nalkins.cloud
+  graylog_port: 12201
+
+serverCrt: |-
+# Mosquitto CRT file content goes here
+
+secrets:
+  docker:
+    privateRepo: true
+    dockerSecretName: nalkinscloud-nexus-docker
+    registry: some.docker.repo
+    username: username
+    password: passowrd
+  devices:
+    dht_pass: nalkinscloud
+    switch_pass: nalkinscloud
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
