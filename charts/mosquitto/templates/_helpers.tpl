@@ -30,3 +30,9 @@ Create chart name and version as used by the chart label.
 {{- define "mosquitto.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{- define "imagePullSecret" }}
+{{- if .Values.image.imagePullSecret }}
+{{- printf "{\"auths\": {\"%s\": {\"auth\": \"%s\"}}}" .Values.image.imagePullSecret.dockerRegistry (printf "%s:%s" .Values.image.imagePullSecret.dockerUsername .Values.image.imagePullSecret.dockerPassword | b64enc) | b64enc }}
+{{- end }}
+{{- end }}
