@@ -16,6 +16,12 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+dependantContainers: {}
+  ## Specify dependant container here as example below
+  ##- name: init-mysql
+  ##  image: busybox
+  ##  command: ['sh', '-c', 'until nc -z mysql.mysql.svc.cluster.local:3306 ; do echo waiting for mysql; sleep 2; done;']
+
 #TODO Set allow_anonymous to false once Auth-Plug and linux alpine 3.8 to mysql backend resolved
 config: |-
   allow_anonymous true
