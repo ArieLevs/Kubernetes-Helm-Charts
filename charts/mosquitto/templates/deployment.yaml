@@ -46,12 +46,21 @@ spec:
             - name: mosquitto-data
               mountPath: /mosquitto/data
               subPath: mosquitto/data
+            {{- if .Values.tls.enabled }}
+            - name: certificates
+              mountPath: /mosquitto/certs
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: mosquitto-config
           configMap:
             name: {{ $fullName }}
+        {{- if .Values.tls.enabled }}
+        - name: certificates
+          secret:
+            secretName: mosquitto-tls-certs
+        {{- end }}
         - name: mosquitto-data
         {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:

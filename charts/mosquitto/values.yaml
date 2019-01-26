@@ -23,6 +23,10 @@ dependantContainers: {}
   ##  command: ['sh', '-c', 'until nc -z mysql.mysql.svc.cluster.local:3306 ; do echo waiting for mysql; sleep 2; done;']
 
 #TODO Set allow_anonymous to false once Auth-Plug and linux alpine 3.8 to mysql backend resolved
+## Mosquitto certificates path must be:
+##  cafile /mosquitto/certs/ca.crt
+##  keyfile /mosquitto/certs/server.key
+##  certfile /mosquitto/certs/server.crt
 config: |-
   allow_anonymous true
 
@@ -36,9 +40,9 @@ config: |-
   #listener 9090
   #protocol websockets
 
-  #cafile /etc/mosquitto/certs/mosquitto_ca.crt
-  #keyfile /etc/mosquitto/certs/mosquitto_server.key
-  #certfile /etc/mosquitto/certs/mosquitto_server.crt
+  #cafile /mosquitto/certs/ca.crt
+  #keyfile /mosquitto/certs/server.key
+  #certfile /mosquitto/certs/server.crt
   #tls_version tlsv1.1
   #use_identity_as_username true
 
@@ -66,6 +70,22 @@ config: |-
 
   #Allow multiple connections for same client
   use_username_as_clientid true
+
+tls:
+  enabled: false
+  certificates:
+#   ca: |-
+#     -----BEGIN CERTIFICATE-----
+#     ...
+#     -----END CERTIFICATE-----
+#   cert: |-
+#     -----BEGIN CERTIFICATE-----
+#     ...
+#     -----END CERTIFICATE-----
+#   key: |-
+#     -----BEGIN RSA PRIVATE KEY-----
+#     ...
+#     -----END RSA PRIVATE KEY-----
 
 persistence:
   enabled: false
