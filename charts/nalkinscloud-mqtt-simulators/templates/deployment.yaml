@@ -20,6 +20,10 @@ spec:
         app.kubernetes.io/name: {{ include "nalkinscloud-mqtt-simulators.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+    {{- with .Values.dependantContainers }}
+      initContainers:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -56,23 +60,11 @@ spec:
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-    {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
       volumes:
         - name: mosquitto-server-crt
           configMap:
             name: {{ $fullName }}
       {{- if .Values.secrets.docker.privateRepo }}
       imagePullSecrets:
-        - name: {{ .Values.secrets.docker.dockerSecretName }}
+        - name: private-image-pull-secret
       {{- end -}}

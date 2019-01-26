@@ -12,9 +12,15 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+dependantContainers:
+  ## Specify dependant container here as example below
+  - name: init-mosquitto
+    image: busybox
+    command: ['sh', '-c', 'until nc -z mosquitto.mosquitto.svc.cluster.local 8883 ; do echo waiting for mosquitto; sleep 2; done;']
+
 envVars:
   environment: alpha
-  broker_host: mosquitto.nalkins.cloud
+  broker_host: mosquitto.mosquitto.svc.cluster.local
   broker_port: 8883
   dht_user: test_dht_simulator
   dht_topic: test_dht_simulator
@@ -34,7 +40,6 @@ serverCrt: |-
 secrets:
   docker:
     privateRepo: true
-    dockerSecretName: nalkinscloud-nexus-docker
     registry: some.docker.repo
     username: username
     password: passowrd
@@ -54,8 +59,3 @@ resources: {}
   #  cpu: 100m
   #  memory: 128Mi
 
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
