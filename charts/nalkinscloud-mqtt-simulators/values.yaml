@@ -22,6 +22,7 @@ envVars:
   environment: alpha
   broker_host: mosquitto.mosquitto.svc.cluster.local
   broker_port: 8883
+  broker_tls: False
   dht_user: test_dht_simulator
   dht_topic: test_dht_simulator
   dht_qos: 1
