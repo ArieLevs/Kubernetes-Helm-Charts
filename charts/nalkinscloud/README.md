@@ -1,6 +1,12 @@
 
 Make sure helm repo is up to date `helm repo update`.
 
+Set for Graylog logs:
+```bash
+--set deployment.env.graylog_host=
+--set deployment.env.graylog_port=
+```
+
 Mandatory parameters to deploy Nalkinscloud:
 
 ```bash

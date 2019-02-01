@@ -14,8 +14,6 @@ deployment:
     version: null
     backend_domain: https://api-alpha.nalkins.cloud
     frontend_domain: https://alpha.nalkins.cloud
-    graylog_host:
-    graylog_port:
     email_host:
     email_port:
 
