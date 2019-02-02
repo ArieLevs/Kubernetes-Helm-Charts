@@ -17,6 +17,16 @@ deployment:
     email_host:
     email_port:
 
+dependantServices:
+  - name: init-database
+    image: busybox
+    command: ['sh', '-c', 'env; until nc -z ${db_host} ${db_port} ; do echo waiting for database; sleep 2; done;']
+    env:
+      - name: db_host
+        value: "mysql.mysql.svc.cluster.local"
+      - name: db_port
+        value: "3306"
+
 secrets:
   # If blank, random 50 char secret created
   django_secret_key:
@@ -37,7 +47,6 @@ configmap:
   databaseVars:
     # Key also used as env name inside project
     db_name: django
-    db_user: django
     db_host: centraldb.nalkins.cloud
 
 service:
@@ -69,4 +78,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
