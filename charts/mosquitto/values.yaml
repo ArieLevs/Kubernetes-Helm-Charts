@@ -16,7 +16,7 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
-dependantContainers: {}
+dependantServices: {}
   ## Specify dependant container here as example below
   ##- name: init-mysql
   ##  image: busybox
