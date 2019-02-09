@@ -16,6 +16,7 @@ deployment:
     frontend_domain: https://alpha.nalkins.cloud
     email_host:
     email_port:
+    static_url: https://arielevs.github.io/
 
 dependantServices:
   - name: init-database

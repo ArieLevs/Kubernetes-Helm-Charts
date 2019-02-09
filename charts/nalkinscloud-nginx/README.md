@@ -1,4 +1,9 @@
 
+Deprecated
+==========
+
+* **Static files are now served via GitHub pages**
+
 Make sure helm repo is up to date `helm repo update`.
 
 Mandatory parameters to deploy Nalkinscloud Nginx:
