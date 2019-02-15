@@ -22,7 +22,6 @@ dependantServices: {}
   ##  image: busybox
   ##  command: ['sh', '-c', 'until nc -z mysql.mysql.svc.cluster.local:3306 ; do echo waiting for mysql; sleep 2; done;']
 
-#TODO Set allow_anonymous to false once Auth-Plug and linux alpine 3.8 to mysql backend resolved
 ## Mosquitto certificates path must be:
 ##  cafile /mosquitto/certs/ca.crt
 ##  keyfile /mosquitto/certs/server.key
@@ -61,7 +60,7 @@ config: |-
   auth_opt_pass $DB_MOSQUITTO_PASS
   auth_opt_userquery SELECT password FROM devices WHERE device_id = '%s'
   auth_opt_superquery SELECT COUNT(*) FROM devices WHERE device_id = '%s' AND super = 1
-  auth_opt_aclquery SELECT topic FROM acls WHERE (device_id = '%s') AND (rw >= '%d')
+  auth_opt_aclquery SELECT topic FROM access_list WHERE (device_id = '%s') AND (rw >= '%d')
   auth_opt_anonusername AnonymouS
 
   auth_opt_mysql_opt_reconnect true
