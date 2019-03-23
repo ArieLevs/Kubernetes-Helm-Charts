@@ -43,6 +43,12 @@ secrets:
   email:
     username: admin
     password: admin
+  google:
+    client_id:
+    client_secret:
+  github:
+    client_id:
+    client_secret:
 
 configmap:
   databaseVars:

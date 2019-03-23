@@ -50,6 +50,27 @@ spec:
                   name: {{ $fullName }}
                   key: email_password
 
+            - name: google_oauth_client_id
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: google_oauth_client_id
+            - name: google_oauth_client_secret
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: google_oauth_client_secret
+            - name: github_oauth_client_id
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: github_oauth_client_id
+            - name: github_oauth_client_secret
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: github_oauth_client_secret
+
             {{- range $key, $value := .Values.deployment.env }}
             - name: {{ $key }}
               value: {{ $value | quote }}
