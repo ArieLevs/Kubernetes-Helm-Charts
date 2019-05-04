@@ -17,6 +17,7 @@ deployment:
     email_host:
     email_port:
     static_url: https://arielevs.github.io/
+    allowed_hosts: localhost
 
 dependantServices:
   - name: init-database
