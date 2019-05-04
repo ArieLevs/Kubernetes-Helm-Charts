@@ -3,7 +3,7 @@ entries:
   mosquitto:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.376673387+02:00
+    created: 2019-05-04T11:58:25.932100464+03:00
     description: Mosquitto MQTT Broker with Auth Plug
     digest: e01a0f74118fc93d0c6cac2abad26b4207726d52b0fb92ece41585ee29fae782
     engine: gotpl
@@ -19,7 +19,7 @@ entries:
     version: 0.0.10
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.380072541+02:00
+    created: 2019-05-04T11:58:25.935516989+03:00
     description: Mosquitto MQTT Broker with Auth Plug
     digest: a385b03c669afc2692f1f0669f7cf544372b5838d63a3b5590846e40b3fcbfad
     engine: gotpl
@@ -35,7 +35,7 @@ entries:
     version: 0.0.9
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.379615533+02:00
+    created: 2019-05-04T11:58:25.935082764+03:00
     description: Mosquitto MQTT Broker with Auth Plug
     digest: 500cd08b1f4e8c32d7df1a403b24ddb9811b92e1e519c27172db7e9d770d0282
     engine: gotpl
@@ -51,7 +51,7 @@ entries:
     version: 0.0.8
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.379179572+02:00
+    created: 2019-05-04T11:58:25.934628183+03:00
     description: Mosquitto MQTT Broker with Auth Plug
     digest: 8a066a7df70d329960ad5d61c35f7a478be65ca8b1160662f2be340694755842
     engine: gotpl
@@ -67,7 +67,7 @@ entries:
     version: 0.0.7
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.378774723+02:00
+    created: 2019-05-04T11:58:25.934214694+03:00
     description: Mosquitto MQTT Broker with Auth Plug
     digest: f56e1721cf2d787bda9e5ea047a7ee5dc3f77956c031ec5e327e9ef4dfafe6bf
     engine: gotpl
@@ -83,7 +83,7 @@ entries:
     version: 0.0.6
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.378321527+02:00
+    created: 2019-05-04T11:58:25.933789665+03:00
     description: Mosquitto MQTT Broker with Auth Plug
     digest: b9371e3afc26a0f8800a55554d7cf846ef8b61ba4bf31808c8d5d7bac74fa4f6
     engine: gotpl
@@ -99,7 +99,7 @@ entries:
     version: 0.0.5
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.377922999+02:00
+    created: 2019-05-04T11:58:25.933377561+03:00
     description: Mosquitto MQTT Broker with Auth Plug
     digest: 6db5762b01dc318bdd0d9a81d13635ea07505e248c4ae4477e5f25358aaef60f
     engine: gotpl
@@ -115,7 +115,7 @@ entries:
     version: 0.0.4
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.377521922+02:00
+    created: 2019-05-04T11:58:25.932913869+03:00
     description: Mosquitto MQTT Broker with Auth Plug
     digest: 4b9f01e398a0745b8094fff7e0688c9cf6c66af185db2b4698e76cab9449b16c
     engine: gotpl
@@ -131,7 +131,7 @@ entries:
     version: 0.0.3
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.377115532+02:00
+    created: 2019-05-04T11:58:25.932501249+03:00
     description: Mosquitto MQTT Broker with Auth Plug
     digest: 07c5d5addce4217e4658c5eed1871be04706250eee32113c8c2e899dbe0522ff
     engine: gotpl
@@ -148,7 +148,28 @@ entries:
   nalkinscloud:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.385302462+02:00
+    created: 2019-05-04T11:58:25.942172351+03:00
+    description: Open source IOT framwork
+    digest: d635582b4abe6089777178f121dbe3a044d84575fcde4676536b60b1e70defd4
+    engine: gotpl
+    home: https://www.nalkins.cloud
+    keywords:
+    - nalkinscloud
+    - iot
+    - django
+    maintainers:
+    - email: levinsonarie@gmail.com
+      name: Arie Lev
+      url: https://www.nalkins.cloud
+    name: nalkinscloud
+    sources:
+    - https://github.com/ArieLevs/NalkinsCloud
+    urls:
+    - nalkinscloud-0.0.20.tgz
+    version: 0.0.20
+  - apiVersion: v1
+    appVersion: 0.0.1
+    created: 2019-05-04T11:58:25.941277402+03:00
     description: Open source IOT framwork
     digest: 3e3671b242f6ffd7f62e75da474672732bc42555d7668580d0dd848875449457
     engine: gotpl
@@ -169,7 +190,7 @@ entries:
     version: 0.0.19
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.384848166+02:00
+    created: 2019-05-04T11:58:25.940308396+03:00
     description: Open source IOT framwork
     digest: e77a999d5b25fdbcd8fb88e05bff2d0c46d9c021875226ae92f576ca1c736706
     engine: gotpl
@@ -190,7 +211,7 @@ entries:
     version: 0.0.18
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.384329643+02:00
+    created: 2019-05-04T11:58:25.939784893+03:00
     description: Open source IOT framwork
     digest: 8eb14f4dafb38c7a32a5c07f11166f818fbf2f83eaeb82d80045852df18ac0c4
     engine: gotpl
@@ -211,7 +232,7 @@ entries:
     version: 0.0.17
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.383776153+02:00
+    created: 2019-05-04T11:58:25.939296099+03:00
     description: Open source IOT framwork
     digest: 9f02322001211760b69e7af5c0a3f405ef0024f5e16f0091479a98bce2e101e9
     engine: gotpl
@@ -232,7 +253,7 @@ entries:
     version: 0.0.16
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.383278667+02:00
+    created: 2019-05-04T11:58:25.938826318+03:00
     description: Open source IOT framwork
     digest: ce592c32c6f6e52eeaf84fee9e01e8e12364eb0e04013713072f6850511e07cf
     engine: gotpl
@@ -253,7 +274,7 @@ entries:
     version: 0.0.15
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.382833111+02:00
+    created: 2019-05-04T11:58:25.938299902+03:00
     description: Open source IOT framwork
     digest: 6dff244f0c250dd87e27a9fccdaa80d6678f137fbf7a3dd5cc498335cd10de2c
     engine: gotpl
@@ -274,7 +295,7 @@ entries:
     version: 0.0.14
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.382324977+02:00
+    created: 2019-05-04T11:58:25.937779688+03:00
     description: Open source IOT framwork
     digest: 834aec906b726cebaaa768166020a3b74b05525d610dc3440b8c683b04ee8f93
     engine: gotpl
@@ -295,7 +316,7 @@ entries:
     version: 0.0.13
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.381889753+02:00
+    created: 2019-05-04T11:58:25.937291849+03:00
     description: Open source IOT framwork
     digest: 5a1632ae64130d74467a393f7f270066df37f24750f4364df1faa5a675ced5cc
     engine: gotpl
@@ -316,7 +337,7 @@ entries:
     version: 0.0.12
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.38127557+02:00
+    created: 2019-05-04T11:58:25.936678152+03:00
     description: Open source IOT framwork
     digest: 4f8b1a055ff200ab17b487d09c64aeb765827856fb659b05772425987941cdd5
     engine: gotpl
@@ -337,7 +358,7 @@ entries:
     version: 0.0.11
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.380698743+02:00
+    created: 2019-05-04T11:58:25.936098342+03:00
     description: Open source IOT framwork
     digest: d1cfd3a1337f9fd68ff512ed179a0710e3659be803ae01a6925ee537a7d3f962
     engine: gotpl
@@ -358,7 +379,7 @@ entries:
     version: 0.0.10
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.38790783+02:00
+    created: 2019-05-04T11:58:25.944563156+03:00
     description: Open source IOT framwork
     digest: c44cac4b28ce02715a0806f46bf7d43df8f0754aaa3824debf2326e478df7d96
     engine: gotpl
@@ -379,7 +400,7 @@ entries:
     version: 0.0.9
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.38716716+02:00
+    created: 2019-05-04T11:58:25.944053028+03:00
     description: Open source IOT framwork
     digest: 1d07cf25a1fc1a19bef15e816462e999722930e94584df1e138f9e9a17030ab2
     engine: gotpl
@@ -400,7 +421,7 @@ entries:
     version: 0.0.8
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.386415885+02:00
+    created: 2019-05-04T11:58:25.943454814+03:00
     description: Open source IOT framwork
     digest: 73d74402f8f701e4c3a794da84b97bbfa1ab7ef450f83fbf75e923497e607c3b
     engine: gotpl
@@ -421,7 +442,7 @@ entries:
     version: 0.0.7
   - apiVersion: v1
     appVersion: 0.0.1
-    created: 2019-03-23T17:38:08.38588444+02:00
+    created: 2019-05-04T11:58:25.942811372+03:00
     description: Open source IOT framwork
     digest: 62726f1f69a76e2273886c477fad2b3ddbd205dce1713467177f072cb67c6fea
     engine: gotpl
@@ -443,7 +464,7 @@ entries:
   nalkinscloud-mqtt-simulators:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-03-23T17:38:08.390569167+02:00
+    created: 2019-05-04T11:58:25.946688048+03:00
     description: A Helm chart for Kubernetes
     digest: 391aff8fc3fb269a542eaa3d6c141cb5802ca60719505a54f84a1a577f8aeb11
     name: nalkinscloud-mqtt-simulators
@@ -452,7 +473,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-03-23T17:38:08.390179794+02:00
+    created: 2019-05-04T11:58:25.946308143+03:00
     description: A Helm chart for Kubernetes
     digest: 7a88a865915e6d3a33dbe0ae09bbe9f12a861d7a77483535a2d9688fbef7ae46
     name: nalkinscloud-mqtt-simulators
@@ -461,7 +482,7 @@ entries:
     version: 0.1.5
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-03-23T17:38:08.389847719+02:00
+    created: 2019-05-04T11:58:25.945943413+03:00
     description: A Helm chart for Kubernetes
     digest: 67b867bb22295e803c09c00518ad1e16bc493d831fd5a40cf43f22a4a7bda972
     name: nalkinscloud-mqtt-simulators
@@ -470,7 +491,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-03-23T17:38:08.389512905+02:00
+    created: 2019-05-04T11:58:25.945581521+03:00
     description: A Helm chart for Kubernetes
     digest: 6a1616ec4e802416f1a7a55481a2c15cc95137ea73e549948e21338fdf0f794b
     name: nalkinscloud-mqtt-simulators
@@ -479,7 +500,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-03-23T17:38:08.389154522+02:00
+    created: 2019-05-04T11:58:25.945259262+03:00
     description: A Helm chart for Kubernetes
     digest: d2e28d2344d2f9eed7c5e876c3a359741723e93d30cc4e9887a0016f097de9d2
     name: nalkinscloud-mqtt-simulators
@@ -488,7 +509,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-03-23T17:38:08.388729815+02:00
+    created: 2019-05-04T11:58:25.944928364+03:00
     description: A Helm chart for Kubernetes
     digest: adbf36565864fd782477ae6b98c655008a1994bdd30f7daac56253f050435fbc
     name: nalkinscloud-mqtt-simulators
@@ -498,7 +519,7 @@ entries:
   nalkinscloud-nginx:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: 2019-03-23T17:38:08.392390708+02:00
+    created: 2019-05-04T11:58:25.94868754+03:00
     description: Nginx proxy for nalkinscloud project
     digest: 0f8c94fe7d0de7a65dd6041e868b47dd892e036e7278937d7cedee4dc8bdf036
     engine: gotpl
@@ -519,7 +540,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: 0.1.0
-    created: 2019-03-23T17:38:08.391917031+02:00
+    created: 2019-05-04T11:58:25.948168799+03:00
     description: Nginx proxy for nalkinscloud project
     digest: 6a679aae654545b71d302fbcd9f6408b013b06eebd186cd27ca1ca42b51ba9fe
     engine: gotpl
@@ -540,7 +561,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: 0.1.0
-    created: 2019-03-23T17:38:08.391447939+02:00
+    created: 2019-05-04T11:58:25.947625827+03:00
     description: Nginx proxy for nalkinscloud project
     digest: b9f57727e54356605e25aa00b02a52379ff2bccd8031cae72492985d3ce900e5
     engine: gotpl
@@ -561,7 +582,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 0.1.0
-    created: 2019-03-23T17:38:08.390999958+02:00
+    created: 2019-05-04T11:58:25.947173797+03:00
     description: Nginx proxy for nalkinscloud project
     digest: a4eb4ad4d95f04a9de52b5b27d3198b669f1e5b277b91d6fa9032054d294886c
     engine: gotpl
@@ -580,4 +601,4 @@ entries:
     urls:
     - nalkinscloud-nginx-0.1.1.tgz
     version: 0.1.1
-generated: 2019-03-23T17:38:08.375495725+02:00
+generated: 2019-05-04T11:58:25.931217053+03:00
