@@ -1,6 +1,6 @@
 {{- $fullName := include "nalkinscloud.fullname" . -}}
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: {{ $fullName }}
   labels:
@@ -11,6 +11,11 @@ spec:
     matchLabels:
       app.kubernetes.io/name: {{ include "nalkinscloud.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20
+      - pause: {}
   template:
     metadata:
       labels:
