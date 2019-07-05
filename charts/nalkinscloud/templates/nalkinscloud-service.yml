@@ -4,15 +4,14 @@ kind: Service
 metadata:
   name: {{ $fullName }}
   labels:
-    app: {{ template "nalkinscloud.name" . }}
-    chart: {{ template "nalkinscloud.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+{{ include "nalkinscloud.labels" . | indent 4 }}
 spec:
   type: {{ .Values.service.type }}
   selector:
-    app: {{ $fullName }}
+    app.kubernetes.io/name: {{ include "nalkinscloud.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
   ports:
   - name: nalkinscloud
     port: {{ .Values.service.port }}
     targetPort: 8000
+    protocol: TCP

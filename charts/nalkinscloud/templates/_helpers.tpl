@@ -32,6 +32,19 @@ Create chart name and version as used by the chart label.
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{/*
+Common labels
+*/}}
+{{- define "nalkinscloud.labels" -}}
+app.kubernetes.io/name: {{ include "nalkinscloud.name" . }}
+helm.sh/chart: {{ include "nalkinscloud.chart" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end -}}
+
 {{- define "imagePullSecret" }}
 {{- if .Values.deployment.image.privateRepo }}
 {{- printf "{\"auths\": {\"%s\": {\"auth\": \"%s\"}}}" .Values.secrets.docker.registry (printf "%s:%s" .Values.secrets.docker.username .Values.secrets.docker.password | b64enc) | b64enc }}

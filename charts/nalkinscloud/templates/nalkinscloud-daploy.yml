@@ -1,20 +1,27 @@
 {{- $fullName := include "nalkinscloud.fullname" . -}}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ $fullName }}
   labels:
-    app: {{ template "nalkinscloud.name" . }}
-    chart: {{ template "nalkinscloud.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+{{ include "nalkinscloud.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "nalkinscloud.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ $fullName }}
+        app.kubernetes.io/name: {{ include "nalkinscloud.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+    {{ if .Values.deployment.image.privateRepo }}
+      imagePullSecrets:
+        - name: {{ .Values.secrets.docker.dockerSecretName }}
+    {{ end }}
+
     {{- with .Values.dependantServices }}
       initContainers:
         {{- toYaml . | nindent 8 }}
@@ -23,6 +30,18 @@ spec:
         - name: {{ $fullName }}
           image: "{{ .Values.deployment.image.repository}}:{{ .Values.deployment.image.tag}}"
           imagePullPolicy: {{ .Values.deployment.image.imagePullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+#          livenessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+#          readinessProbe:
+#            httpGet:
+#              path: /
+#              port: http
           env:
             - name: db_pass
               valueFrom:
@@ -83,10 +102,15 @@ spec:
                   name: {{ $fullName }}-config-map
                   key: {{ $key }}
             {{- end }}
-
-          ports:
-            - containerPort: 8000
-      {{ if .Values.deployment.image.privateRepo }}
-      imagePullSecrets:
-        - name: {{ .Values.secrets.docker.dockerSecretName }}
-      {{ end }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
