@@ -12,13 +12,14 @@ deployment:
   env:
     environment: alpha
     version: null
-    backend_domain: https://api-alpha.nalkins.cloud
+    backend_domain: https://alpha.api.nalkins.cloud
     frontend_domain: https://alpha.nalkins.cloud
-    email_host:
-    email_port:
+    email_host: smtp.gmail.com
+    email_port: 587
     static_url: https://arielevs.github.io/
-    allowed_hosts: localhost
-    graylog_host: graylog.graylog.svc.cluster.local
+    # allowed_hosts passed as as string separated by ','
+    allowed_hosts: "10.*"
+    graylog_host: graylog.nalkins.cloud
     graylog_port: 12201
 
 dependantServices:
@@ -27,7 +28,7 @@ dependantServices:
     command: ['sh', '-c', 'env; until nc -z ${db_host} ${db_port} ; do echo waiting for database; sleep 2; done;']
     env:
       - name: db_host
-        value: "mysql.mysql.svc.cluster.local"
+        value: "alpha.centraldb.nalkins.cloud"
       - name: db_port
         value: "3306"
 
@@ -38,7 +39,7 @@ secrets:
 
   docker:
     dockerSecretName: nalkinscloud-nexus-docker
-    registry: url
+    registry: docker.nalkins.cloud
     username: admin
     password: admin
   database:
@@ -57,29 +58,29 @@ secrets:
 configmap:
   databaseVars:
     # Key also used as env name inside project
-    db_name: django
-    db_host: centraldb.nalkins.cloud
+    db_name: nalkinscloud
+    db_host: alpha.centraldb.nalkins.cloud
 
 service:
   type: ClusterIP
   port: 80
 
 ingress:
-  enabled: false
-  annotations: {}
-  #  kubernetes.io/ingress.class: nginx
-  #  ingress.kubernetes.io/ssl-redirect: true
-  #  kubernetes.io/tls-acme: true
-  #  certmanager.k8s.io/acme-dns01-provider: cf-dns
-  #  certmanager.k8s.io/acme-challenge-type: dns01
-  #  certmanager.k8s.io/cluster-issuer: letsencrypt-production
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/ssl-redirect: true
+    kubernetes.io/tls-acme: true
+    certmanager.k8s.io/acme-dns01-provider: cf-dns
+    certmanager.k8s.io/acme-challenge-type: dns01
+    certmanager.k8s.io/cluster-issuer: letsencrypt-production
   path: /
   hosts:
-    - api-alpha.nalkins.cloud
-  tls: {}
-  #  - secretName: nalkins-cloud-tls
-  #    hosts:
-  #      - nalkins.cloud
+    - alpha.api.nalkins.cloud
+  tls:
+    - secretName: nalkinscloud-api-tls
+      hosts:
+        - alpha.api.nalkins.cloud
 
 resources: {}
   # limits:
