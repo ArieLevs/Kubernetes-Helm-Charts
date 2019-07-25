@@ -39,7 +39,7 @@ spec:
     {{- end }}
       containers:
         - name: {{ $fullName }}
-          image: "{{ .Values.deployment.image.repository}}:{{ .Values.deployment.image.tag}}"
+          image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}"
           imagePullPolicy: {{ .Values.deployment.image.imagePullPolicy }}
           ports:
             - name: http
@@ -54,6 +54,9 @@ spec:
 #              path: /
 #              port: http
           env:
+            - name: version
+              value: {{ .Values.deployment.image.tag | quote }}
+
             - name: db_pass
               valueFrom:
                 secretKeyRef:

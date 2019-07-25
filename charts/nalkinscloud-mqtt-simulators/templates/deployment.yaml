@@ -36,6 +36,9 @@ spec:
               readOnly: true
           {{- end }}
           env:
+            - name: version
+              value: {{ .Values.image.tag | quote }}
+
             - name: dht_pass
               valueFrom:
                 secretKeyRef:
