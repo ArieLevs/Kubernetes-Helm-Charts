@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 deployment:
-  replicaCount: 2
+  replicaCount: 3
   image:
     privateRepo: true
     repository: docker.nalkins.cloud/nalkinscloud/nalkinscloud-django-backend
@@ -57,7 +57,7 @@ secrets:
 configmap:
   databaseVars:
     # Key also used as env name inside project
-    db_name: nalkinscloud
+    db_name: django
     db_host: alpha.centraldb.nalkins.cloud
 
 service:
