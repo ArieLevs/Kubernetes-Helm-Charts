@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: docker.nalkins.cloud/nalkinscloud-mqtt-automation-simulators/nalkinscloud-mqtt-automation-simulators
-  tag: 0.1.16
+  tag: 0.1.19
   pullPolicy: IfNotPresent
 
 nameOverride: ""
