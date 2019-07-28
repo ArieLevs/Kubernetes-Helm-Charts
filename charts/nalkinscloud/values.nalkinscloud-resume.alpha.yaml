@@ -1,0 +1,87 @@
+# Default values for airflow.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+deployment:
+  replicaCount: 3
+  image:
+    privateRepo: true
+    repository: docker.nalkins.cloud/nalkinscloud-resume/resume
+    tag: latest
+    imagePullPolicy: IfNotPresent
+  env:
+    environment: alpha
+    backend_domain: https://alpha.resume.nalkins.cloud
+    frontend_domain: https://alpha.resume.nalkins.cloud
+    email_host: smtp.gmail.com
+    email_port: 587
+    static_url: https://arielevs.github.io/
+    allowed_hosts: alpha.resume.nalkins.cloud
+
+dependantServices:
+  - name: init-database
+    image: busybox
+    command: ['sh', '-c', 'env; until nc -z ${db_host} ${db_port} ; do echo waiting for database; sleep 2; done;']
+    env:
+      - name: db_host
+        value: "alpha.centraldb.nalkins.cloud"
+      - name: db_port
+        value: "3306"
+
+secrets:
+  # If blank, random 50 char secret created
+  ## NOTE - If using Argo CD this value must ve set or the app will always be in 'OutOfSync' state
+  django_secret_key:
+
+  docker:
+    dockerSecretName: nalkinscloud-nexus-docker
+    registry: docker.nalkins.cloud
+    username: admin
+    password: admin
+  database:
+    username: django
+    password: django
+  email:
+    username: admin
+    password: admin
+
+configmap:
+  databaseVars:
+    # Key also used as env name inside project
+    db_name: django
+    db_host: alpha.centraldb.nalkins.cloud
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/ssl-redirect: true
+    kubernetes.io/tls-acme: true
+    certmanager.k8s.io/acme-dns01-provider: cf-dns
+    certmanager.k8s.io/acme-challenge-type: dns01
+    certmanager.k8s.io/cluster-issuer: letsencrypt-production
+  path: /
+  hosts:
+    - alpha.resume.nalkins.cloud
+  tls:
+    - secretName: nalkinscloud-resume-tls
+      hosts:
+        - alpha.resume.nalkins.cloud
+
+resources: {}
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
