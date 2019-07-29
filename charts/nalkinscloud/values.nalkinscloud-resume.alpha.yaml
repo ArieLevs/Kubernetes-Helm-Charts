@@ -18,6 +18,10 @@ deployment:
     static_url: https://arielevs.github.io/
     allowed_hosts: alpha.resume.nalkins.cloud
 
+vaultAgent:
+  enabled: false
+  vaultRoleName: kube-agent-nalkinscloud-resume
+
 dependantServices:
   - name: init-database
     image: busybox

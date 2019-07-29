@@ -28,16 +28,88 @@ spec:
         app.kubernetes.io/name: {{ include "nalkinscloud.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+#      serviceAccountName: vault-auth
+#      shareProcessNamespace: true
+#
+#      volumes:
+#        - name: shared-data
+#          emptyDir: {}
+#
+#        - name: vault-token
+#          emptyDir:
+#            medium: Memory
+#
+#        - name: config
+#          configMap:
+#            name: vault-agent-config-map
+#            items:
+#              - key: vault-agent-config.hcl
+#                path: vault-agent-config.hcl
+#              - key: consul-template-config.hcl
+#                path: consul-template-config.hcl
+
     {{ if .Values.deployment.image.privateRepo }}
       imagePullSecrets:
         - name: {{ .Values.secrets.docker.dockerSecretName }}
     {{ end }}
 
-    {{- with .Values.dependantServices }}
       initContainers:
+#        - name: vault-agent-auth
+#          image: vault
+#
+#          volumeMounts:
+#            - name: config
+#              mountPath: /etc/vault
+#            - name: vault-token
+#              mountPath: /home/vault
+#
+#          # This assumes Vault running on local host and K8s running in Minikube using VirtualBox
+#          env:
+#            - name: VAULT_ADDR
+#              value: https://vault.nalkins.cloud
+#
+#          # Run the Vault agent
+#          args:
+#            [
+#              "agent",
+#              "-config=/etc/vault/vault-agent-config.hcl",
+#              #"-log-level=debug",
+#            ]
+    {{- with .Values.dependantServices }}
         {{- toYaml . | nindent 8 }}
     {{- end }}
       containers:
+#        # Consul Template container
+#        - name: consul-template
+#          image: hashicorp/consul-template:alpine
+#          imagePullPolicy: IfNotPresent
+#          securityContext:
+#            capabilities:
+#              add: ['SYS_PTRACE']
+#          volumeMounts:
+#            - name: vault-token
+#              mountPath: /home/vault
+#
+#            - name: config
+#              mountPath: /etc/consul-template
+#
+#            - name: shared-data
+#              mountPath: /etc/secrets
+#
+#          env:
+#            - name: HOME
+#              value: /home/vault
+#
+#            - name: VAULT_ADDR
+#              value: https://vault.nalkins.cloud
+#
+#          # Consul-Template looks in $HOME/.vault-token, $VAULT_TOKEN, or -vault-token (via CLI)
+#          args:
+#            [
+#              "-config=/etc/consul-template/consul-template-config.hcl",
+#              #"-log-level=debug",
+#            ]
+
         - name: {{ $fullName }}
           image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}"
           imagePullPolicy: {{ .Values.deployment.image.imagePullPolicy }}
@@ -116,6 +188,11 @@ spec:
                   name: {{ $fullName }}-config-map
                   key: {{ $key }}
             {{- end }}
+
+#          volumeMounts:
+#            - name: shared-data
+#              mountPath: /tmp
+
     {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

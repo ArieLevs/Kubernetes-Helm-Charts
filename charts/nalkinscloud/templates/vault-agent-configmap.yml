@@ -1,0 +1,10 @@
+{{- if .Values.vaultAgent.enabled -}}
+{{- $fullName := include "nalkinscloud.fullname" . -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vault-agent-config-map
+data:
+{{ (.Files.Glob "vault-configs/vault-agent-config.hcl").AsConfig | indent 4 }}
+{{ (.Files.Glob "vault-configs/consul-template-config.hcl").AsConfig | indent 4 }}
+{{- end }}

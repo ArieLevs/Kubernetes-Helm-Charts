@@ -21,6 +21,10 @@ deployment:
     graylog_host: graylog.graylog.svc.cluster.local
     graylog_port: 12201
 
+vaultAgent:
+  enabled: false
+  vaultRoleName: kube-agent-nalkinscloud-django-backend
+
 dependantServices:
   - name: init-database
     image: busybox
