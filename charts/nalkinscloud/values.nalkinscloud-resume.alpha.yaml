@@ -6,7 +6,7 @@ deployment:
   replicaCount: 3
   image:
     privateRepo: true
-    repository: docker.nalkins.cloud/nalkinscloud-resume/resume
+    repository: docker.nalkins.cloud/nalkinscloud-resume/nalkinscloud-resume
     tag: 0.0.16
     imagePullPolicy: IfNotPresent
   env:
