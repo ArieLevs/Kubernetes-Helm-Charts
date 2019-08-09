@@ -117,14 +117,17 @@ spec:
             - name: http
               containerPort: 8000
               protocol: TCP
-#          livenessProbe:
-#            httpGet:
-#              path: /
-#              port: http
-#          readinessProbe:
-#            httpGet:
-#              path: /
-#              port: http
+          # Any code greater than or equal to 200 and less than 400 indicates success. Any other code indicates failure.
+          livenessProbe:
+            httpGet:
+              path: /liveness
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: http
           env:
             - name: version
               value: {{ .Values.deployment.image.tag | quote }}
