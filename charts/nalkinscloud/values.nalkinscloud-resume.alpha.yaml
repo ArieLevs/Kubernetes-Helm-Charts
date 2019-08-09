@@ -16,7 +16,7 @@ deployment:
     email_host: smtp.gmail.com
     email_port: 587
     static_url: https://arielevs.github.io/
-    allowed_hosts: alpha.resume.nalkins.cloud
+    allowed_hosts: "alpha.resume.nalkins.cloud,10.*"
 
 vaultAgent:
   enabled: false
