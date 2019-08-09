@@ -120,13 +120,13 @@ spec:
           # Any code greater than or equal to 200 and less than 400 indicates success. Any other code indicates failure.
           livenessProbe:
             httpGet:
-              path: /liveness
+              path: /liveness/
               port: http
             initialDelaySeconds: 5
             periodSeconds: 3
           readinessProbe:
             httpGet:
-              path: /readiness
+              path: /readiness/
               port: http
           env:
             - name: version
