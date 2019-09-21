@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 deployment:
-  replicaCount: 3
+  replicaCount: 2
   image:
     privateRepo: true
     repository: docker.nalkins.cloud/nalkinscloud-resume/nalkinscloud-resume
