@@ -1,0 +1,9 @@
+{{- $fullName := include "sms-verifier-backend.fullname" . -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $fullName }}-config-map
+data:
+{{- range $key, $value := .Values.configmap.databaseVars }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}
