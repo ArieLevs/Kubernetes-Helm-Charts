@@ -7,7 +7,6 @@ deployment:
   image:
     privateRepo: true
     repository: docker.nalkins.cloud/sms-verifier/sms-verifier-backend
-    tag: 0.0.2
     imagePullPolicy: IfNotPresent
   env:
     environment: alpha

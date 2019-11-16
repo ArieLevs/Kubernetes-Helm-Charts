@@ -51,7 +51,7 @@ spec:
               port: http
           env:
             - name: version
-              value: {{ .Values.deployment.image.tag | quote }}
+              value: {{ .Chart.AppVersion | quote }}
 
             - name: db_pass
               valueFrom:
