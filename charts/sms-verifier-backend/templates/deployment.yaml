@@ -48,6 +48,59 @@ spec:
                 value: 127.0.0.1
               path: /readiness/
               port: http
+          env:
+            - name: version
+              value: {{ .Values.deployment.image.tag | quote }}
+
+            - name: db_pass
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: db_pass
+            - name: db_user
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: db_user
+            - name: django_secret_key
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: django_secret_key
+
+            - name: google_oauth_client_id
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: google_oauth_client_id
+            - name: google_oauth_client_secret
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: google_oauth_client_secret
+            - name: github_oauth_client_id
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: github_oauth_client_id
+            - name: github_oauth_client_secret
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullName }}
+                  key: github_oauth_client_secret
+
+            {{- range $key, $value := .Values.deployment.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+
+            {{- range $key, $value := .Values.configmap.databaseVars }}
+            - name: {{ $key }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ $fullName }}-config-map
+                  key: {{ $key }}
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
