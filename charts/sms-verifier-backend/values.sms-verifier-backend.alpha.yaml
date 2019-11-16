@@ -15,6 +15,17 @@ deployment:
     # allowed_hosts passed as as string separated by ','
     allowed_hosts: "10.*"
 
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
 vaultAgent:
   enabled: false
   vaultRoleName: kube-agent-sms-verifier-backend
@@ -35,7 +46,7 @@ secrets:
   django_secret_key:
 
   docker:
-    dockerSecretName: nalkinscloud-nexus-docker
+    dockerSecretName: sms-verifier-nexus-docker
     registry: docker.nalkins.cloud
     username: admin
     password: admin
@@ -62,27 +73,32 @@ service:
 ingress:
   enabled: true
   annotations:
-    kubernetes.io/ingress.class: nginx
-    ingress.kubernetes.io/ssl-redirect: true
-    kubernetes.io/tls-acme: true
-    certmanager.k8s.io/acme-dns01-provider: cf-dns
-    certmanager.k8s.io/acme-challenge-type: dns01
-    certmanager.k8s.io/cluster-issuer: letsencrypt-production
-  path: /
+    kubernetes.io/ingress.class: "nginx"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+    certmanager.k8s.io/acme-dns01-provider: "cf-dns"
+    certmanager.k8s.io/acme-challenge-type: "dns01"
+    certmanager.k8s.io/cluster-issuer: "letsencrypt-production"
   hosts:
-    - sms-verifier.nalkins.cloud
+    - host: sms-verifier.nalkins.cloud
+      paths:
+        - /
   tls:
     - secretName: sms-verifier-tls
       hosts:
         - sms-verifier.nalkins.cloud
 
 resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
-  #  cpu: 100m
-  #  memory: 128Mi
+  #   cpu: 100m
+  #   memory: 128Mi
   # requests:
-  #  cpu: 100m
-  #  memory: 128Mi
+  #   cpu: 100m
+  #   memory: 128Mi
 
 nodeSelector: {}
 
