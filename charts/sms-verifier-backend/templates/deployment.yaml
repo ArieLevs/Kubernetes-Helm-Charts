@@ -1,3 +1,4 @@
+{{- $fullName := include "sms-verifier-backend.fullname" . -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
