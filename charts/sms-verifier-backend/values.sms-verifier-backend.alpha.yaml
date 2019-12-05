@@ -11,8 +11,13 @@ deployment:
   env:
     environment: production
     static_url: https://arielevs.github.io/
-    # allowed_hosts passed as as string separated by ','
-    allowed_hosts: "10.*"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -42,7 +47,7 @@ dependantServices:
 secrets:
   # If blank, random 50 char secret created
   ## NOTE - If using Argo CD this value must ve set or the app will always be in 'OutOfSync' state
-  django_secret_key:
+  django_secret_key: some_secret_key
 
   docker:
     dockerSecretName: sms-verifier-nexus-docker

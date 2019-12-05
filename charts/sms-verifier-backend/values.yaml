@@ -2,15 +2,17 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
-
-image:
-  repository: nginx
-  pullPolicy: IfNotPresent
-
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+deployment:
+  replicaCount: 1
+  image:
+    privateRepo: false
+    repository: docker.io/sms-verifier/sms-verifier-backend
+    imagePullPolicy: IfNotPresent
+  env:
+    environment: dev
+    static_url: https://arielevs.github.io/
+    # allowed_hosts passed as as string separated by ','
+    allowed_hosts: "10.*"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -30,6 +32,46 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+vaultAgent:
+  enabled: false
+  vaultRoleName: kube-agent-sms-verifier-backend
+
+dependantServices:
+  - name: init-database
+    image: busybox
+    command: ['sh', '-c', 'env; until nc -z ${db_host} ${db_port} ; do echo waiting for database; sleep 2; done;']
+    env:
+      - name: db_host
+        value: "localhost"
+      - name: db_port
+        value: "3306"
+
+secrets:
+  # If blank, random 50 char secret created
+  ## NOTE - If using Argo CD this value must ve set or the app will always be in 'OutOfSync' state
+  django_secret_key:
+
+  docker:
+    dockerSecretName: sms-verifier-docker
+    registry: docker.io
+    username: admin
+    password: admin
+  database:
+    username: django
+    password: django
+  google:
+    client_id: google_client_id
+    client_secret: google_client_secret
+  github:
+    client_id: github_client_id
+    client_secret: github_client_secret
+
+configmap:
+  databaseVars:
+    # Key also used as env name inside project
+    db_name: sms_verifier
+    db_host: localhost
+
 service:
   type: ClusterIP
   port: 80
@@ -38,7 +80,7 @@ ingress:
   enabled: false
   annotations: {}
     # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  # kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
       paths: []
