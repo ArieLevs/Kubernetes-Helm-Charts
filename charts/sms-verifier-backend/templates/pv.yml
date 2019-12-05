@@ -1,0 +1,37 @@
+{{- $fullName := include "sms-verifier-backend.fullname" . -}}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ $fullName }}-nfs-pv
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    pv.beta.kubernetes.io/gid: "0"
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  # indicates that the volume will be preserved after the pods accessing it terminates
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: {{ .Release.Namespace }}
+    name: {{ $fullName }}-pvc
+  nfs:
+    path: /mnt/seagate_iron_0/sms_verifier
+    server: freenas.nalkins.cloud
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $fullName }}-pvc
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ include "sms-verifier-backend.fullname" . }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 250Gi
