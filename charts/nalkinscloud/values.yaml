@@ -15,7 +15,7 @@ deployment:
     frontend_domain: https://alpha.nalkins.cloud
     email_host:
     email_port:
-    static_url: https://arielevs.github.io/
+    static_url: https://nalkins.cloud/
     # allowed_hosts passed as as string separated by ','
     allowed_hosts: localhost
     graylog_host: graylog.graylog.svc.cluster.local

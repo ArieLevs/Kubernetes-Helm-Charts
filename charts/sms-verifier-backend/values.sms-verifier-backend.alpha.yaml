@@ -10,7 +10,7 @@ deployment:
     imagePullPolicy: IfNotPresent
   env:
     environment: production
-    static_url: https://arielevs.github.io/
+    static_url: https://nalkins.cloud/
 
 serviceAccount:
   # Specifies whether a service account should be created

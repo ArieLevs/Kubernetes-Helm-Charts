@@ -10,7 +10,7 @@ deployment:
     imagePullPolicy: IfNotPresent
   env:
     environment: dev
-    static_url: https://arielevs.github.io/
+    static_url: https://nalkins.cloud/
     # allowed_hosts passed as as string separated by ','
     allowed_hosts: "10.*"
 
