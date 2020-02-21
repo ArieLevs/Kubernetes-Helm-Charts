@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 server:
-  replicaCount: 1
+  replicaCount: 2
   image:
     repository: docker.io/arielev/grpc-messenger
     imagePullPolicy: Always

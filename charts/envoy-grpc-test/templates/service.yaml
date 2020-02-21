@@ -16,5 +16,5 @@ spec:
       protocol: TCP
       name: grpc-port
   selector:
-    app.kubernetes.io/name: {{ include "envoy-grpc-test.name" . }}-server
+    app.kubernetes.io/name: grpc-server
     app.kubernetes.io/instance: {{ .Release.Name }}
