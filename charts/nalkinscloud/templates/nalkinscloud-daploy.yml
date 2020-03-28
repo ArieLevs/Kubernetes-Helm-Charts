@@ -32,6 +32,7 @@ spec:
         app.kubernetes.io/name: {{ include "nalkinscloud.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      serviceAccountName: {{ $fullName }}
 #      serviceAccountName: vault-auth
 #      shareProcessNamespace: true
 #
