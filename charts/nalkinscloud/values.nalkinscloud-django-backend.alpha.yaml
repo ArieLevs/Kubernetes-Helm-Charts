@@ -3,6 +3,9 @@
 # Declare variables to be passed into your templates.
 
 deployment:
+  ## Add annotations on pod level
+  annotations: {}
+
   replicaCount: 3
   image:
     privateRepo: true

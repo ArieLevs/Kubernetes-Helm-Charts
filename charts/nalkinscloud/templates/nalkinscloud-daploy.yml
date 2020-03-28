@@ -24,6 +24,9 @@ spec:
       - pause: {}
   template:
     metadata:
+      {{- with .Values.deployment.annotations }}
+        {{- toYaml . | nindent 6 }}
+      {{- end }}
       labels:
         app.kubernetes.io/name: {{ include "nalkinscloud.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
