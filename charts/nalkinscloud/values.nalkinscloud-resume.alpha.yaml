@@ -4,7 +4,10 @@
 
 deployment:
   ## Add annotations on pod level
-  annotations: {}
+  annotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: "nalkinscloud-resume"
+    vault.hashicorp.com/agent-inject-secret-credentials.txt: "secret/nalkinscloud-resume/backend/django"
 
   replicaCount: 2
   image:
