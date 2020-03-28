@@ -8,6 +8,7 @@ deployment:
     vault.hashicorp.com/agent-inject: "true"
     vault.hashicorp.com/role: "nalkinscloud-resume"
     vault.hashicorp.com/agent-inject-secret-credentials.txt: "secret/nalkinscloud-resume/backend/django"
+    vault.hashicorp.com/service: "vault-agent-injector"
 
   replicaCount: 2
   image:
