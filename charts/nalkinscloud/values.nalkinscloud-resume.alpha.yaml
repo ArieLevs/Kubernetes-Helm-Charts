@@ -8,6 +8,7 @@ deployment:
     ## Annotations docs here: https://www.vaultproject.io/docs/platform/k8s/injector/annotations/
     vault.hashicorp.com/agent-inject: "true"
     vault.hashicorp.com/role: "nalkinscloud-resume"
+    vault.hashicorp.com/agent-inject-secret-django-db-values: "secret/nalkinscloud-resume/backend/database"
     vault.hashicorp.com/agent-inject-secret-django-config: "secret/nalkinscloud-resume/backend/django"
     vault.hashicorp.com/agent-inject-status: "update"
 
@@ -15,9 +16,16 @@ deployment:
     ## Deployment template example can be found here:
     ## https://www.vaultproject.io/docs/platform/k8s/injector/examples/#deployments-statefulsets-etc
     vault.hashicorp.com/agent-inject-template-django-config: |
+      {{- with secret "secret/nalkinscloud-resume/backend/database" -}}
+      db_host: {{ .Data.db_host }}
+      db_name: {{ .Data.db_name }}
+      db_port: {{ .Data.db_port }}
+      username: {{ .Data.username }}
+      password: {{ .Data.password }}
+      {{- end -}}
+    vault.hashicorp.com/agent-inject-template-django-db-values: |
       {{- with secret "secret/nalkinscloud-resume/backend/django" -}}
-      django_username: {{ .Data.data.username }}
-      django_password: {{ .Data.data.password }}
+      django_secret: {{ .Data.django_secret }}
       {{- end -}}
 
   replicaCount: 2
