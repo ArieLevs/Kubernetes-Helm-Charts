@@ -32,7 +32,7 @@ deployment:
   image:
     privateRepo: true
     repository: docker.nalkins.cloud/nalkinscloud/nalkinscloud-django-backend
-    tag: 0.0.47
+    tag: 0.0.46
     imagePullPolicy: IfNotPresent
   env:
     environment: alpha
