@@ -102,11 +102,11 @@ ingress:
     cert-manager.io/cluster-issuer: letsencrypt-production
   path: /
   hosts:
-    - alpha.api.nalkins.cloud
+    - api.alpha.nalkins.cloud
   tls:
     - secretName: nalkinscloud-api-tls
       hosts:
-        - alpha.api.nalkins.cloud
+        - api.alpha.nalkins.cloud
 
 resources: {}
   # limits:
