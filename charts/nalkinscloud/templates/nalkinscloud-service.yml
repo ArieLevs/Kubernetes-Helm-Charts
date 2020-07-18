@@ -6,6 +6,7 @@ metadata:
   labels:
 {{ include "nalkinscloud.labels" . | indent 4 }}
 spec:
+  externalTrafficPolicy: Local
   type: {{ .Values.service.type }}
   selector:
     app.kubernetes.io/name: {{ include "nalkinscloud.name" . }}
