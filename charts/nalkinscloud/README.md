@@ -45,3 +45,17 @@ helm upgrade nalkinscloud-api \
   --set secrets.email.username=[EMAIL_PASSWORD] \
   --set secrets.email.password=[EMAIL_PASSWORD]
 ```
+
+Install resume
+```shell script
+kubectl create namespace nalkinscloud-resume
+helm repo update
+
+helm upgrade nalkinscloud-resume \
+    --install nalkinscloud/nalkinscloud \
+    --namespace nalkinscloud-resume \
+    -f values.nalkinscloud-resume.local.yaml \
+    --set secrets.docker.registry=docker.nalkins.cloud \
+    --set secrets.docker.username=[DOCKER_USERNAME] \
+    --set secrets.docker.password=[DOCKER_PASSWORD]
+```

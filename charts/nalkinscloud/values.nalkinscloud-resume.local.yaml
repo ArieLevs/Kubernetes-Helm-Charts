@@ -1,0 +1,109 @@
+# Default values for airflow.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+deployment:
+  ## Add annotations on pod level
+  annotations:
+    ## Annotations docs here: https://www.vaultproject.io/docs/platform/k8s/injector/annotations/
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: "nalkinscloud-resume"
+    vault.hashicorp.com/agent-inject-secret-django-db-values: "secret/nalkinscloud-resume/backend/database"
+    vault.hashicorp.com/agent-inject-secret-django-config: "secret/nalkinscloud-resume/backend/django"
+    vault.hashicorp.com/agent-inject-status: "update"
+
+    ## This should map to the same unique value provided in vault.hashicorp.com/agent-inject-secret-X
+    ## Deployment template example can be found here:
+    ## https://www.vaultproject.io/docs/platform/k8s/injector/examples/#deployments-statefulsets-etc
+    vault.hashicorp.com/agent-inject-template-django-db-values: |
+      {{- with secret "secret/nalkinscloud-resume/backend/database" -}}
+      db_host: {{ .Data.data.db_host }}
+      db_name: {{ .Data.data.db_name }}
+      db_port: {{ .Data.data.db_port }}
+      username: {{ .Data.data.username }}
+      password: {{ .Data.data.password }}
+      {{- end -}}
+    vault.hashicorp.com/agent-inject-template-django-config: |
+      {{- with secret "secret/nalkinscloud-resume/backend/django" -}}
+      django_secret: {{ .Data.data.django_secret }}
+      {{- end -}}
+
+  replicaCount: 1
+  image:
+    privateRepo: true
+    repository: nalkinscloud-resume/nalkinscloud-resume
+    tag: 0.0.28
+    imagePullPolicy: IfNotPresent
+  env:
+    environment: dev
+    backend_domain: https://resume.alpha.nalkins.cloud
+    frontend_domain: https://resume.alpha.nalkins.cloud
+    email_host: smtp.gmail.com
+    email_port: 587
+    static_url: https://nalkins.cloud/
+    allowed_hosts: "resume.localhost,10.*"
+
+vaultAgent:
+  enabled: false
+  vaultRoleName: kube-agent-nalkinscloud-resume
+
+dependantServices:
+  - name: init-database
+    image: busybox
+    command: ['sh', '-c', 'env; until nc -z ${db_host} ${db_port} ; do echo waiting for database; sleep 2; done;']
+    env:
+      - name: db_host
+        value: "centraldb.alpha.nalkins.cloud"
+      - name: db_port
+        value: "3306"
+
+secrets:
+  # If blank, random 50 char secret created
+  ## NOTE - If using Argo CD this value must ve set or the app will always be in 'OutOfSync' state
+  django_secret_key:
+
+  docker:
+    dockerSecretName: nalkinscloud-nexus-docker
+    registry: docker.nalkins.cloud
+    username: admin
+    password: admin
+  database:
+    username: django
+    password: django
+  email:
+    username: admin
+    password: admin
+
+configmap:
+  databaseVars:
+    # Key also used as env name inside project
+    db_name: django
+    db_host: centraldb.alpha.nalkins.cloud
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/ssl-redirect: true
+    kubernetes.io/tls-acme: true
+  path: /
+  hosts:
+    - resume.localhost
+
+resources: {}
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
