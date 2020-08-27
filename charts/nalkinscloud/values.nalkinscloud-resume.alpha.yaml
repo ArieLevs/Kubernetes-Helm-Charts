@@ -28,11 +28,11 @@ deployment:
       django_secret: {{ .Data.data.django_secret }}
       {{- end -}}
 
-  replicaCount: 1
+  replicaCount: 2
   image:
     privateRepo: true
     repository: docker.nalkins.cloud/nalkinscloud-resume/nalkinscloud-resume
-    tag: 0.0.27
+    tag: 0.0.28
     imagePullPolicy: IfNotPresent
   env:
     environment: alpha
