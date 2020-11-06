@@ -32,7 +32,7 @@ deployment:
   image:
     privateRepo: true
     repository: docker.nalkins.cloud/nalkinscloud-resume/nalkinscloud-resume
-    tag: 0.0.28
+    tag: 0.0.31
     imagePullPolicy: IfNotPresent
   env:
     environment: alpha
