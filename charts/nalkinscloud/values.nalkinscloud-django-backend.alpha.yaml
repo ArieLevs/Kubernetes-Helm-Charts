@@ -1,6 +1,19 @@
-# Default values for airflow.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+
+tags:
+  e2e-test: false
+
+# values for the 'mariadb' subchart
+nalkinscloud-db:
+  enabled: false
+  auth:
+    rootPassword: "administrator"
+    # creating db, username and password on first run
+    database: nalkinscloud
+    username: django
+    password: django
+  primary:
+    persistence:
+      enabled: false
 
 deployment:
   ## Add annotations on pod level
@@ -28,7 +41,7 @@ deployment:
       django_secret: {{ .Data.data.django_secret }}
       {{- end -}}
 
-  replicaCount: 3
+  replicaCount: 1
   image:
     privateRepo: true
     repository: docker.nalkins.cloud/nalkinscloud/nalkinscloud-django-backend
@@ -56,7 +69,7 @@ dependantServices:
     command: ['sh', '-c', 'env; until nc -z ${db_host} ${db_port} ; do echo waiting for database; sleep 2; done;']
     env:
       - name: db_host
-        value: "alpha.centraldb.nalkins.cloud"
+        value: "nalkinscloud-api-nalkinscloud-db.default.svc.cluster.local"
       - name: db_port
         value: "3306"
 

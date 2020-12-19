@@ -1,6 +1,19 @@
-# Default values for airflow.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+
+tags:
+  e2e-test: false
+
+# values for the 'mariadb' subchart
+nalkinscloud-db:
+  enabled: false
+  auth:
+    rootPassword: "administrator"
+    # creating db, username and password on first run
+    database: nalkinscloud
+    username: django
+    password: django
+  primary:
+    persistence:
+      enabled: false
 
 deployment:
   ## Add annotations on pod level
@@ -16,8 +29,8 @@ deployment:
     environment: alpha
     backend_domain: https://api-alpha.nalkins.cloud
     frontend_domain: https://alpha.nalkins.cloud
-    email_host:
-    email_port:
+    email_host: smtp.gmail.com
+    email_port: 587
     static_url: https://nalkins.cloud/
     # allowed_hosts passed as as string separated by ','
     allowed_hosts: localhost
@@ -45,7 +58,7 @@ secrets:
 
   docker:
     dockerSecretName: nalkinscloud-nexus-docker
-    registry: url
+    registry: docker.nalkins.cloud
     username: admin
     password: admin
   database:

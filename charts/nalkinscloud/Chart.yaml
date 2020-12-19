@@ -1,18 +1,30 @@
-apiVersion: v1
+apiVersion: v2
 appVersion: 0.0.1
+name: nalkinscloud
+version: 0.1.0
 description: Open source IOT framwork
-engine: gotpl
+
 home: https://www.nalkins.cloud
 icon: null
 keywords:
-- nalkinscloud
-- iot
-- django
+  - nalkinscloud
+  - iot
+  - django
 maintainers:
-- email: levinsonarie@gmail.com
-  name: Arie Lev
-  url: https://www.nalkins.cloud
-name: nalkinscloud
+  - email: levinsonarie@gmail.com
+    name: Arie Lev
+    url: https://www.nalkins.cloud
+
 sources:
-- https://github.com/ArieLevs/NalkinsCloud
-version: 0.0.26
+  - https://github.com/ArieLevs/NalkinsCloud
+
+dependencies:
+  - name: mariadb
+    version: 9.1.4
+    repository: https://charts.bitnami.com/bitnami
+    condition: mariadb.enabled
+    tags:
+      - e2e-test
+#    import-values:
+#      - test
+    alias: nalkinscloud-db
