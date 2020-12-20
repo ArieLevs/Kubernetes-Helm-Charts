@@ -36,3 +36,15 @@ helm upgrade nalkinscloud-resume \
     --set secrets.docker.username=[DOCKER_USERNAME] \
     --set secrets.docker.password=[DOCKER_PASSWORD]
 ```
+
+### Executing chart in CI environment:
+```shell script
+helm upgrade nalkinscloud-api \
+  --install nalkinscloud/nalkinscloud \
+  --namespace e2etest \
+  -f values.nalkinscloud-django-backend.alpha.yaml \
+  --set tags.e2e-test=true --set mariadb.enabled=true --set vault.enabled=true \
+  --set secrets.docker.registry=docker.nalkins.cloud \
+  --set secrets.docker.username=[DOCKER_USERNAME] \
+  --set secrets.docker.password=[DOCKER_PASSWORD]
+```

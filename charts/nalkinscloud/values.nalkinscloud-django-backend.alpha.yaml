@@ -8,12 +8,25 @@ nalkinscloud-db:
   auth:
     rootPassword: "administrator"
     # creating db, username and password on first run
-    database: nalkinscloud
+    database: django
     username: django
     password: django
   primary:
     persistence:
       enabled: false
+
+vault:
+  enabled: false
+  injector:
+    namespaceSelector:
+      matchLabels:
+        # update using --set below value so injector will have its webhook on a single namespace (ci use only)
+        vault-injector: "random-namespace"
+  server:
+    dataStorage:
+      enabled: false
+    dev:
+      enabled: true
 
 deployment:
   ## Add annotations on pod level
@@ -69,7 +82,7 @@ dependantServices:
     command: ['sh', '-c', 'env; until nc -z ${db_host} ${db_port} ; do echo waiting for database; sleep 2; done;']
     env:
       - name: db_host
-        value: "nalkinscloud-api-nalkinscloud-db.default.svc.cluster.local"
+        value: "nalkinscloud-api-nalkinscloud-db.e2etest.svc.cluster.local"
       - name: db_port
         value: "3306"
 
@@ -100,7 +113,7 @@ configmap:
   databaseVars:
     # Key also used as env name inside project
     db_name: django
-    db_host: alpha.centraldb.nalkins.cloud
+    db_host: nalkinscloud-api-nalkinscloud-db.e2etest.svc.cluster.local
 
 service:
   type: ClusterIP
