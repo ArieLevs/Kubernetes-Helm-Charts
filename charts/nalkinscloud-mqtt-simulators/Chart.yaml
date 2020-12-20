@@ -1,6 +1,6 @@
 apiVersion: v2
 appVersion: 0.1.19
-description: Nalkinscloud IOT endpoints simulator
+description: Nalkinscloud IOT mqtt simulator
 name: nalkinscloud-mqtt-simulators
 version: 0.1.7
 icon: null
