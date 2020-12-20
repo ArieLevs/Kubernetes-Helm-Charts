@@ -1,12 +1,12 @@
 apiVersion: v2
 appVersion: 0.1.19
 description: Nalkinscloud IOT mqtt simulator
-name: nalkinscloud-mqtt-simulators
-version: 0.1.7
 icon: null
-sources:
-  - https://github.com/ArieLevs/NalkinsCloud
 maintainers:
-  - email: levinsonarie@gmail.com
-    name: Arie Lev
-    url: https://www.nalkins.cloud
+- email: levinsonarie@gmail.com
+  name: Arie Lev
+  url: https://www.nalkins.cloud
+name: nalkinscloud-mqtt-simulators
+sources:
+- https://github.com/ArieLevs/NalkinsCloud
+version: 0.1.8
