@@ -8,12 +8,12 @@ dependencies:
   tags:
   - e2e-test
   version: 9.1.4
-- name: vault
+- condition: vault.enabled
+  name: vault
   repository: https://helm.releases.hashicorp.com
-  version: 0.8.0
-  condition: vault.enabled
   tags:
-    - e2e-test
+  - e2e-test
+  version: 0.8.0
 description: Open source IOT framwork
 home: https://www.nalkins.cloud
 icon: null
@@ -28,4 +28,4 @@ maintainers:
 name: nalkinscloud
 sources:
 - https://github.com/ArieLevs/NalkinsCloud
-version: 0.1.1
+version: 0.1.2
