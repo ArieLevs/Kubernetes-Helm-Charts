@@ -15,12 +15,12 @@ dependencies:
   tags:
   - e2e-test
   version: 0.8.0
-- condition: simulators.enabled
-  alias: simulators
+- alias: simulators
+  condition: simulators.enabled
   name: nalkinscloud-mqtt-simulators
   repository: https://arielevs.github.io/Kubernetes-Helm-Charts/
   tags:
-    - e2e-test
+  - e2e-test
   version: 0.1.8
 description: Open source IOT framwork
 home: https://www.nalkins.cloud
@@ -36,4 +36,4 @@ maintainers:
 name: nalkinscloud
 sources:
 - https://github.com/ArieLevs/NalkinsCloud
-version: 0.1.2
+version: 0.1.3
