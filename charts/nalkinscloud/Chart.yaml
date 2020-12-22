@@ -8,13 +8,15 @@ dependencies:
   tags:
   - e2e-test
   version: 9.1.4
-- condition: vault.enabled
+- alias: vault
+  condition: vault.enabled
   name: vault
   repository: https://helm.releases.hashicorp.com
   tags:
   - e2e-test
   version: 0.8.0
 - condition: simulators.enabled
+  alias: simulators
   name: nalkinscloud-mqtt-simulators
   repository: https://arielevs.github.io/Kubernetes-Helm-Charts/
   tags:

@@ -2,32 +2,6 @@
 tags:
   e2e-test: false
 
-# values for the 'mariadb' subchart
-nalkinscloud-db:
-  enabled: false
-  auth:
-    rootPassword: "administrator"
-    # creating db, username and password on first run
-    database: django
-    username: django
-    password: django
-  primary:
-    persistence:
-      enabled: false
-
-vault:
-  enabled: false
-  injector:
-    namespaceSelector:
-      matchLabels:
-        # update using --set below value so injector will have its webhook on a single namespace (ci use only)
-        vault-injector: "random-namespace"
-  server:
-    dataStorage:
-      enabled: false
-    dev:
-      enabled: true
-
 deployment:
   ## Add annotations on pod level
   annotations:
@@ -72,52 +46,13 @@ deployment:
     graylog_host: graylog.nalkins.cloud
     graylog_port: 12201
 
-vaultAgent:
-  enabled: false
-  vaultRoleName: kube-agent-nalkinscloud-django-backend
-
-dependantServices:
-  - name: init-database
-    image: busybox
-    command: ['sh', '-c', 'env; until nc -z ${db_host} ${db_port} ; do echo waiting for database; sleep 2; done;']
-    env:
-      - name: db_host
-        value: "nalkinscloud-api-nalkinscloud-db.e2etest.svc.cluster.local"
-      - name: db_port
-        value: "3306"
-
-secrets:
-  # If blank, random 50 char secret created
-  ## NOTE - If using Argo CD this value must ve set or the app will always be in 'OutOfSync' state
-  django_secret_key:
-
-  docker:
-    dockerSecretName: nalkinscloud-nexus-docker
-    registry: docker.nalkins.cloud
-    username: admin
-    password: admin
-  database:
-    username: django
-    password: django
-  email:
-    username: admin
-    password: admin
-  google:
-    client_id: google_client_id
-    client_secret: google_client_secret
-  github:
-    client_id: github_client_id
-    client_secret: github_client_secret
+dependantServices: []
 
 configmap:
   databaseVars:
     # Key also used as env name inside project
     db_name: django
     db_host: nalkinscloud-api-nalkinscloud-db.e2etest.svc.cluster.local
-
-service:
-  type: ClusterIP
-  port: 80
 
 ingress:
   enabled: true
@@ -133,17 +68,3 @@ ingress:
     - secretName: nalkinscloud-api-tls
       hosts:
         - api.alpha.nalkins.cloud
-
-resources: {}
-  # limits:
-  #  cpu: 100m
-  #  memory: 128Mi
-  # requests:
-  #  cpu: 100m
-  #  memory: 128Mi
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}

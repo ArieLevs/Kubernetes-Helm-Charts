@@ -37,7 +37,6 @@ deployment:
 
   replicaCount: 1
   image:
-    privateRepo: true
     repository: docker.nalkins.cloud/nalkinscloud/nalkinscloud-django-backend
     tag: latest
     imagePullPolicy: IfNotPresent
@@ -75,6 +74,7 @@ secrets:
   docker:
     dockerSecretName: nalkinscloud-nexus-docker
     registry: docker.nalkins.cloud
+    # if both username and password are not "" (null), a docker registry secret will be created
     username: admin
     password: admin
   database:

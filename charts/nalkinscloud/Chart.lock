@@ -1,12 +1,12 @@
 dependencies:
-- name: mariadb
-  repository: https://charts.bitnami.com/bitnami
-  version: 9.1.4
 - name: vault
   repository: https://helm.releases.hashicorp.com
   version: 0.8.0
+- name: mariadb
+  repository: https://charts.bitnami.com/bitnami
+  version: 9.1.4
 - name: nalkinscloud-mqtt-simulators
   repository: https://arielevs.github.io/Kubernetes-Helm-Charts/
   version: 0.1.8
-digest: sha256:a344e2214f74ba21c38967bdf266bd27008b41ff8fc37f2f6c0f3ec9484942cf
-generated: "2020-12-21T14:32:58.093954+02:00"
+digest: sha256:1ef5d5dd32e8038c403a32cec8b675218a896811d7213289039b354f2f9c61f5
+generated: "2020-12-22T19:58:09.287715+02:00"

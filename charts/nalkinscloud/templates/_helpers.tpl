@@ -46,7 +46,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{- define "imagePullSecret" }}
-{{- if .Values.deployment.image.privateRepo }}
+{{- if .Values.secrets.docker.password }}
 {{- printf "{\"auths\": {\"%s\": {\"auth\": \"%s\"}}}" .Values.secrets.docker.registry (printf "%s:%s" .Values.secrets.docker.username .Values.secrets.docker.password | b64enc) | b64enc }}
 {{- end }}
 {{- end }}
