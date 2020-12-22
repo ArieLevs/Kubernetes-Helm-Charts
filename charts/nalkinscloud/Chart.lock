@@ -5,5 +5,8 @@ dependencies:
 - name: vault
   repository: https://helm.releases.hashicorp.com
   version: 0.8.0
-digest: sha256:61d73d38d36477d6bec495cdbfd86bf5571ba61c0ffd6fc3e452fab8cc21de91
-generated: "2020-12-19T17:12:21.021208+02:00"
+- name: nalkinscloud-mqtt-simulators
+  repository: https://arielevs.github.io/Kubernetes-Helm-Charts/
+  version: 0.1.8
+digest: sha256:a344e2214f74ba21c38967bdf266bd27008b41ff8fc37f2f6c0f3ec9484942cf
+generated: "2020-12-21T14:32:58.093954+02:00"

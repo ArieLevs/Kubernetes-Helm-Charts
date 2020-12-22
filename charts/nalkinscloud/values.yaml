@@ -8,12 +8,28 @@ nalkinscloud-db:
   auth:
     rootPassword: "administrator"
     # creating db, username and password on first run
-    database: nalkinscloud
+    database: django
     username: django
     password: django
   primary:
     persistence:
       enabled: false
+
+vault:
+  enabled: false
+  injector:
+    namespaceSelector:
+      matchLabels:
+        # update using --set below value so injector will have its webhook on a single namespace (ci use only)
+        vault-injector: "random-namespace"
+  server:
+    dataStorage:
+      enabled: false
+    dev:
+      enabled: true
+
+simulators:
+  enabled: false
 
 deployment:
   ## Add annotations on pod level

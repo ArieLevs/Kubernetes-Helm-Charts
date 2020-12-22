@@ -38,13 +38,16 @@ helm upgrade nalkinscloud-resume \
 ```
 
 ### Executing chart in CI environment:
+* the `tags.e2e-test=true` will deploy all dependency chart needed in CI env
 ```shell script
 helm upgrade nalkinscloud-api \
   --install nalkinscloud/nalkinscloud \
   --namespace e2etest \
   -f values.nalkinscloud-django-backend.alpha.yaml \
-  --set tags.e2e-test=true --set mariadb.enabled=true --set vault.enabled=true \
+  --set tags.e2e-test=true \
   --set secrets.docker.registry=docker.nalkins.cloud \
   --set secrets.docker.username=[DOCKER_USERNAME] \
-  --set secrets.docker.password=[DOCKER_PASSWORD]
+  --set secrets.docker.password=[DOCKER_PASSWORD] \
+  --set vault.injector.namespaceSelector.matchLabels.vault-injector=[CI_DEPLOYED_NAMESPACE] \
+  
 ```
