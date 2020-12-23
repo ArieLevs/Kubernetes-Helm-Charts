@@ -9,4 +9,4 @@ maintainers:
 name: nalkinscloud-mqtt-simulators
 sources:
 - https://github.com/ArieLevs/NalkinsCloud
-version: 0.1.9
+version: 0.1.10
