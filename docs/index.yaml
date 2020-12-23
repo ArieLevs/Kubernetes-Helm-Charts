@@ -3,7 +3,7 @@ entries:
   mosquitto:
   - apiVersion: v2
     appVersion: 1.5.5
-    created: "2020-12-23T17:06:23.312449919Z"
+    created: "2020-12-23T17:10:15.83406087Z"
     description: Mosquitto MQTT Broker with Auth Plug
     digest: 54f208cb2ef2222b78d705b5248f69d753ef1e5a0394b2304285ce9e948db6fa
     keywords:
@@ -22,7 +22,7 @@ entries:
     version: 0.0.11
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.311483136Z"
+    created: "2020-12-23T17:10:15.832364392Z"
     description: Mosquitto MQTT Broker with Auth Plug
     digest: e01a0f74118fc93d0c6cac2abad26b4207726d52b0fb92ece41585ee29fae782
     keywords:
@@ -37,7 +37,7 @@ entries:
     version: 0.0.10
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.318800291Z"
+    created: "2020-12-23T17:10:15.839623561Z"
     description: Mosquitto MQTT Broker with Auth Plug
     digest: a385b03c669afc2692f1f0669f7cf544372b5838d63a3b5590846e40b3fcbfad
     keywords:
@@ -52,7 +52,7 @@ entries:
     version: 0.0.9
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.318048143Z"
+    created: "2020-12-23T17:10:15.838845625Z"
     description: Mosquitto MQTT Broker with Auth Plug
     digest: 500cd08b1f4e8c32d7df1a403b24ddb9811b92e1e519c27172db7e9d770d0282
     keywords:
@@ -67,7 +67,7 @@ entries:
     version: 0.0.8
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.317438875Z"
+    created: "2020-12-23T17:10:15.838178566Z"
     description: Mosquitto MQTT Broker with Auth Plug
     digest: 8a066a7df70d329960ad5d61c35f7a478be65ca8b1160662f2be340694755842
     keywords:
@@ -82,7 +82,7 @@ entries:
     version: 0.0.7
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.316812637Z"
+    created: "2020-12-23T17:10:15.837563513Z"
     description: Mosquitto MQTT Broker with Auth Plug
     digest: f56e1721cf2d787bda9e5ea047a7ee5dc3f77956c031ec5e327e9ef4dfafe6bf
     keywords:
@@ -97,7 +97,7 @@ entries:
     version: 0.0.6
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.316125522Z"
+    created: "2020-12-23T17:10:15.836906243Z"
     description: Mosquitto MQTT Broker with Auth Plug
     digest: b9371e3afc26a0f8800a55554d7cf846ef8b61ba4bf31808c8d5d7bac74fa4f6
     keywords:
@@ -112,7 +112,7 @@ entries:
     version: 0.0.5
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.315507301Z"
+    created: "2020-12-23T17:10:15.836277516Z"
     description: Mosquitto MQTT Broker with Auth Plug
     digest: 6db5762b01dc318bdd0d9a81d13635ea07505e248c4ae4477e5f25358aaef60f
     keywords:
@@ -127,7 +127,7 @@ entries:
     version: 0.0.4
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.314826616Z"
+    created: "2020-12-23T17:10:15.835664472Z"
     description: Mosquitto MQTT Broker with Auth Plug
     digest: 4b9f01e398a0745b8094fff7e0688c9cf6c66af185db2b4698e76cab9449b16c
     keywords:
@@ -142,7 +142,7 @@ entries:
     version: 0.0.3
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.313568001Z"
+    created: "2020-12-23T17:10:15.834980096Z"
     description: Mosquitto MQTT Broker with Auth Plug
     digest: 07c5d5addce4217e4658c5eed1871be04706250eee32113c8c2e899dbe0522ff
     keywords:
@@ -158,7 +158,56 @@ entries:
   nalkinscloud:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.392443066Z"
+    created: "2020-12-23T17:10:15.932699676Z"
+    dependencies:
+    - alias: nalkinscloud-db
+      condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - e2e-test
+      version: 9.1.4
+    - alias: vault
+      condition: vault.enabled
+      name: vault
+      repository: https://helm.releases.hashicorp.com
+      tags:
+      - e2e-test
+      version: 0.8.0
+    - alias: mosquitto
+      condition: mosquitto.enabled
+      name: mosquitto
+      repository: https://arielevs.github.io/Kubernetes-Helm-Charts/
+      tags:
+      - e2e-test
+      version: 0.0.11
+    - alias: simulators
+      condition: simulators.enabled
+      name: nalkinscloud-mqtt-simulators
+      repository: https://arielevs.github.io/Kubernetes-Helm-Charts/
+      tags:
+      - e2e-test
+      version: 0.1.10
+    description: Open source IOT framwork
+    digest: 294c7ddb5a1b5c33b61900d5fb5e44e80b08a0bcf2d2abf3367db95e5aac4a60
+    home: https://www.nalkins.cloud
+    keywords:
+    - nalkinscloud
+    - iot
+    - django
+    maintainers:
+    - email: levinsonarie@gmail.com
+      name: Arie Lev
+      url: https://www.nalkins.cloud
+    name: nalkinscloud
+    sources:
+    - https://github.com/ArieLevs/NalkinsCloud
+    urls:
+    - nalkinscloud-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2020-12-23T17:10:15.920788962Z"
     dependencies:
     - alias: nalkinscloud-db
       condition: mariadb.enabled
@@ -207,7 +256,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.382336575Z"
+    created: "2020-12-23T17:10:15.910753167Z"
     dependencies:
     - alias: nalkinscloud-db
       condition: mariadb.enabled
@@ -256,7 +305,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.371708742Z"
+    created: "2020-12-23T17:10:15.898484892Z"
     dependencies:
     - alias: nalkinscloud-db
       condition: mariadb.enabled
@@ -305,7 +354,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.361676212Z"
+    created: "2020-12-23T17:10:15.888807149Z"
     dependencies:
     - alias: nalkinscloud-db
       condition: mariadb.enabled
@@ -347,7 +396,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.352598595Z"
+    created: "2020-12-23T17:10:15.877010702Z"
     dependencies:
     - alias: nalkinscloud-db
       condition: mariadb.enabled
@@ -381,7 +430,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.34373072Z"
+    created: "2020-12-23T17:10:15.866994156Z"
     dependencies:
     - alias: nalkinscloud-db
       condition: mariadb.enabled
@@ -409,7 +458,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.334931078Z"
+    created: "2020-12-23T17:10:15.855879001Z"
     description: Open source IOT framwork
     digest: a658dbcc9c94c7a40c6f2d92e8adac8fe7c0932e64fac0b5d0c95751dceb0415
     home: https://www.nalkins.cloud
@@ -429,7 +478,7 @@ entries:
     version: 0.0.26
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.334032958Z"
+    created: "2020-12-23T17:10:15.854815883Z"
     description: Open source IOT framwork
     digest: e27fb172c32cd367b528ab5185939e64073aacbe0ee03a24c96123124ee53a14
     home: https://www.nalkins.cloud
@@ -449,7 +498,7 @@ entries:
     version: 0.0.24
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.333084871Z"
+    created: "2020-12-23T17:10:15.853789725Z"
     description: Open source IOT framwork
     digest: 4671c19d8955480ffcc07953fe9fb4d2ffcd7d4b3bcf09037210a735c99413ce
     home: https://www.nalkins.cloud
@@ -469,7 +518,7 @@ entries:
     version: 0.0.23
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.330377503Z"
+    created: "2020-12-23T17:10:15.852935999Z"
     description: Open source IOT framwork
     digest: 2e7fca59761572f65e61baaed9b15ed454e36c7b04e3358ba8bbadc3202073ab
     home: https://www.nalkins.cloud
@@ -489,7 +538,7 @@ entries:
     version: 0.0.22
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.329481518Z"
+    created: "2020-12-23T17:10:15.852071807Z"
     description: Open source IOT framwork
     digest: a7e4e21d581aa2a3790dc3f067210eff8bf1e10c71e530c8484999bc4b06bb13
     home: https://www.nalkins.cloud
@@ -509,7 +558,7 @@ entries:
     version: 0.0.21
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.328594685Z"
+    created: "2020-12-23T17:10:15.851127062Z"
     description: Open source IOT framwork
     digest: d635582b4abe6089777178f121dbe3a044d84575fcde4676536b60b1e70defd4
     home: https://www.nalkins.cloud
@@ -529,7 +578,7 @@ entries:
     version: 0.0.20
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.327793287Z"
+    created: "2020-12-23T17:10:15.848448781Z"
     description: Open source IOT framwork
     digest: 3e3671b242f6ffd7f62e75da474672732bc42555d7668580d0dd848875449457
     home: https://www.nalkins.cloud
@@ -549,7 +598,7 @@ entries:
     version: 0.0.19
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.326924164Z"
+    created: "2020-12-23T17:10:15.847601821Z"
     description: Open source IOT framwork
     digest: e77a999d5b25fdbcd8fb88e05bff2d0c46d9c021875226ae92f576ca1c736706
     home: https://www.nalkins.cloud
@@ -569,7 +618,7 @@ entries:
     version: 0.0.18
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.325751642Z"
+    created: "2020-12-23T17:10:15.846818935Z"
     description: Open source IOT framwork
     digest: 8eb14f4dafb38c7a32a5c07f11166f818fbf2f83eaeb82d80045852df18ac0c4
     home: https://www.nalkins.cloud
@@ -589,7 +638,7 @@ entries:
     version: 0.0.17
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.324877215Z"
+    created: "2020-12-23T17:10:15.845538938Z"
     description: Open source IOT framwork
     digest: 9f02322001211760b69e7af5c0a3f405ef0024f5e16f0091479a98bce2e101e9
     home: https://www.nalkins.cloud
@@ -609,7 +658,7 @@ entries:
     version: 0.0.16
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.324080996Z"
+    created: "2020-12-23T17:10:15.844810473Z"
     description: Open source IOT framwork
     digest: ce592c32c6f6e52eeaf84fee9e01e8e12364eb0e04013713072f6850511e07cf
     home: https://www.nalkins.cloud
@@ -629,7 +678,7 @@ entries:
     version: 0.0.15
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.323313968Z"
+    created: "2020-12-23T17:10:15.844075715Z"
     description: Open source IOT framwork
     digest: 6dff244f0c250dd87e27a9fccdaa80d6678f137fbf7a3dd5cc498335cd10de2c
     home: https://www.nalkins.cloud
@@ -649,7 +698,7 @@ entries:
     version: 0.0.14
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.322568729Z"
+    created: "2020-12-23T17:10:15.843311876Z"
     description: Open source IOT framwork
     digest: 834aec906b726cebaaa768166020a3b74b05525d610dc3440b8c683b04ee8f93
     home: https://www.nalkins.cloud
@@ -669,7 +718,7 @@ entries:
     version: 0.0.13
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.321900659Z"
+    created: "2020-12-23T17:10:15.842627686Z"
     description: Open source IOT framwork
     digest: 5a1632ae64130d74467a393f7f270066df37f24750f4364df1faa5a675ced5cc
     home: https://www.nalkins.cloud
@@ -689,7 +738,7 @@ entries:
     version: 0.0.12
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.320895798Z"
+    created: "2020-12-23T17:10:15.841600822Z"
     description: Open source IOT framwork
     digest: 4f8b1a055ff200ab17b487d09c64aeb765827856fb659b05772425987941cdd5
     home: https://www.nalkins.cloud
@@ -709,7 +758,7 @@ entries:
     version: 0.0.11
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.319849986Z"
+    created: "2020-12-23T17:10:15.840585209Z"
     description: Open source IOT framwork
     digest: d1cfd3a1337f9fd68ff512ed179a0710e3659be803ae01a6925ee537a7d3f962
     home: https://www.nalkins.cloud
@@ -729,7 +778,7 @@ entries:
     version: 0.0.10
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.338406052Z"
+    created: "2020-12-23T17:10:15.859694078Z"
     description: Open source IOT framwork
     digest: c44cac4b28ce02715a0806f46bf7d43df8f0754aaa3824debf2326e478df7d96
     home: https://www.nalkins.cloud
@@ -749,7 +798,7 @@ entries:
     version: 0.0.9
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.337479018Z"
+    created: "2020-12-23T17:10:15.858637646Z"
     description: Open source IOT framwork
     digest: 1d07cf25a1fc1a19bef15e816462e999722930e94584df1e138f9e9a17030ab2
     home: https://www.nalkins.cloud
@@ -769,7 +818,7 @@ entries:
     version: 0.0.8
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.336475238Z"
+    created: "2020-12-23T17:10:15.857514842Z"
     description: Open source IOT framwork
     digest: 73d74402f8f701e4c3a794da84b97bbfa1ab7ef450f83fbf75e923497e607c3b
     home: https://www.nalkins.cloud
@@ -789,7 +838,7 @@ entries:
     version: 0.0.7
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2020-12-23T17:06:23.335529063Z"
+    created: "2020-12-23T17:10:15.856503494Z"
     description: Open source IOT framwork
     digest: 62726f1f69a76e2273886c477fad2b3ddbd205dce1713467177f072cb67c6fea
     home: https://www.nalkins.cloud
@@ -810,7 +859,7 @@ entries:
   nalkinscloud-mqtt-simulators:
   - apiVersion: v2
     appVersion: 0.1.19
-    created: "2020-12-23T17:06:23.393642362Z"
+    created: "2020-12-23T17:10:15.933991155Z"
     description: Nalkinscloud IOT mqtt simulator
     digest: aaece413bbc1231f35e20f88b042204e6fd2e61ac0bfcd4f63ad52a0d786625f
     maintainers:
@@ -825,7 +874,7 @@ entries:
     version: 0.1.10
   - apiVersion: v2
     appVersion: 0.1.19
-    created: "2020-12-23T17:06:23.397958519Z"
+    created: "2020-12-23T17:10:15.940713805Z"
     description: Nalkinscloud IOT mqtt simulator
     digest: 085e8761f9ca75572a1fc6e521ba79ca783d7e6a00fc76466ab6cf5af8c2051b
     maintainers:
@@ -840,7 +889,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: 0.1.19
-    created: "2020-12-23T17:06:23.397323372Z"
+    created: "2020-12-23T17:10:15.940011938Z"
     description: Nalkinscloud IOT mqtt simulator
     digest: 03a31a3264535d8e53133644a99c9053a5a1637e648d0ffbbbd5061ed91e34fc
     maintainers:
@@ -855,7 +904,7 @@ entries:
     version: 0.1.8
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-12-23T17:06:23.396650312Z"
+    created: "2020-12-23T17:10:15.938779025Z"
     description: A Helm chart for Kubernetes
     digest: 391aff8fc3fb269a542eaa3d6c141cb5802ca60719505a54f84a1a577f8aeb11
     name: nalkinscloud-mqtt-simulators
@@ -864,7 +913,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-12-23T17:06:23.3959472Z"
+    created: "2020-12-23T17:10:15.938094892Z"
     description: A Helm chart for Kubernetes
     digest: 7a88a865915e6d3a33dbe0ae09bbe9f12a861d7a77483535a2d9688fbef7ae46
     name: nalkinscloud-mqtt-simulators
@@ -873,7 +922,7 @@ entries:
     version: 0.1.5
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-12-23T17:06:23.395361894Z"
+    created: "2020-12-23T17:10:15.937411069Z"
     description: A Helm chart for Kubernetes
     digest: 67b867bb22295e803c09c00518ad1e16bc493d831fd5a40cf43f22a4a7bda972
     name: nalkinscloud-mqtt-simulators
@@ -882,7 +931,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-12-23T17:06:23.394801877Z"
+    created: "2020-12-23T17:10:15.935260009Z"
     description: A Helm chart for Kubernetes
     digest: 6a1616ec4e802416f1a7a55481a2c15cc95137ea73e549948e21338fdf0f794b
     name: nalkinscloud-mqtt-simulators
@@ -891,7 +940,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-12-23T17:06:23.394221853Z"
+    created: "2020-12-23T17:10:15.934647706Z"
     description: A Helm chart for Kubernetes
     digest: d2e28d2344d2f9eed7c5e876c3a359741723e93d30cc4e9887a0016f097de9d2
     name: nalkinscloud-mqtt-simulators
@@ -900,7 +949,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-12-23T17:06:23.392991886Z"
+    created: "2020-12-23T17:10:15.933328525Z"
     description: A Helm chart for Kubernetes
     digest: adbf36565864fd782477ae6b98c655008a1994bdd30f7daac56253f050435fbc
     name: nalkinscloud-mqtt-simulators
@@ -910,7 +959,7 @@ entries:
   nalkinscloud-nginx:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2020-12-23T17:06:23.407675291Z"
+    created: "2020-12-23T17:10:15.94504758Z"
     description: Nginx proxy for nalkinscloud project
     digest: 0f8c94fe7d0de7a65dd6041e868b47dd892e036e7278937d7cedee4dc8bdf036
     home: https://www.nalkins.cloud
@@ -930,7 +979,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2020-12-23T17:06:23.406578738Z"
+    created: "2020-12-23T17:10:15.944125209Z"
     description: Nginx proxy for nalkinscloud project
     digest: 6a679aae654545b71d302fbcd9f6408b013b06eebd186cd27ca1ca42b51ba9fe
     home: https://www.nalkins.cloud
@@ -950,7 +999,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2020-12-23T17:06:23.403248209Z"
+    created: "2020-12-23T17:10:15.942848259Z"
     description: Nginx proxy for nalkinscloud project
     digest: b9f57727e54356605e25aa00b02a52379ff2bccd8031cae72492985d3ce900e5
     home: https://www.nalkins.cloud
@@ -970,7 +1019,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2020-12-23T17:06:23.401758787Z"
+    created: "2020-12-23T17:10:15.941731518Z"
     description: Nginx proxy for nalkinscloud project
     digest: a4eb4ad4d95f04a9de52b5b27d3198b669f1e5b277b91d6fa9032054d294886c
     home: https://www.nalkins.cloud
@@ -988,4 +1037,4 @@ entries:
     urls:
     - nalkinscloud-nginx-0.1.1.tgz
     version: 0.1.1
-generated: "2020-12-23T17:06:23.310175084Z"
+generated: "2020-12-23T17:10:15.831119277Z"
