@@ -1,8 +1,8 @@
 {{- $fullName := include "nalkinscloud.fullname" . -}}
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
-#apiVersion: apps/v1
-#kind: Deployment
+#apiVersion: argoproj.io/v1alpha1
+#kind: Rollout
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: {{ $fullName }}
   labels:
@@ -14,14 +14,14 @@ spec:
       app.kubernetes.io/name: {{ include "nalkinscloud.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   strategy:
-#    type: RollingUpdate
-#    rollingUpdate:
-#      maxSurge: 1
-#      maxUnavailable: 0
-    canary:
-      steps:
-      - setWeight: 40
-      - pause: {}
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+#    canary:
+#      steps:
+#      - setWeight: 40
+#      - pause: {}
   template:
     metadata:
     {{- with .Values.deployment.annotations }}
@@ -53,12 +53,23 @@ spec:
 #              - key: consul-template-config.hcl
 #                path: consul-template-config.hcl
 
-    {{ if .Values.deployment.image.privateRepo }}
+    {{ if .Values.secrets.docker.password }}
       imagePullSecrets:
         - name: {{ .Values.secrets.docker.dockerSecretName }}
     {{ end }}
 
       initContainers:
+        - name: init-database
+          image: busybox
+          command: ['sh', '-c', 'env; until nc -z ${db_host} ${db_port} ; do echo waiting for database; sleep 2; done;']
+          env:
+            - name: db_host
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ $fullName }}-config-map
+                  key: db_host
+            - name: db_port
+              value: "3306"
 #        - name: vault-agent-auth
 #          image: vault
 #
@@ -80,7 +91,7 @@ spec:
 #              "-config=/etc/vault/vault-agent-config.hcl",
 #              #"-log-level=debug",
 #            ]
-    {{- with .Values.dependantServices }}
+    {{- with .Values.additionalInitContaners }}
         {{- toYaml . | nindent 8 }}
     {{- end }}
       containers:

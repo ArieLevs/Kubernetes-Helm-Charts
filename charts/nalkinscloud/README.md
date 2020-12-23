@@ -43,11 +43,12 @@ helm upgrade nalkinscloud-resume \
 helm upgrade nalkinscloud-api \
   --install nalkinscloud/nalkinscloud \
   --namespace e2etest \
-  -f values.nalkinscloud-django-backend.alpha.yaml \
-  --set tags.e2e-test=true \
+  -f values.nalkinscloud-django-backend.ci.yaml \
+  --set mariadb.enabled=true --set vault.enabled=true --set mosquitto.enabled=true --set simulators.enabled=true
   --set secrets.docker.registry=docker.nalkins.cloud \
   --set secrets.docker.username=[DOCKER_USERNAME] \
   --set secrets.docker.password=[DOCKER_PASSWORD] \
   --set vault.injector.namespaceSelector.matchLabels.vault-injector=[CI_DEPLOYED_NAMESPACE] \
-  
+  --set configmap.databaseVars.db_host=nalkinscloud-api-nalkinscloud-db.e2etest.svc.cluster.local \
+  --set simulators.envVars.broker_host=nalkinscloud-api-mosquitto.e2etest.svc.cluster.local
 ```

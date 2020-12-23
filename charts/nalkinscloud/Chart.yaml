@@ -15,6 +15,13 @@ dependencies:
   tags:
   - e2e-test
   version: 0.8.0
+- alias: mosquitto
+  condition: mosquitto.enabled
+  name: mosquitto
+  repository: https://arielevs.github.io/Kubernetes-Helm-Charts/
+  tags:
+  - e2e-test
+  version: 0.0.10
 - alias: simulators
   condition: simulators.enabled
   name: nalkinscloud-mqtt-simulators

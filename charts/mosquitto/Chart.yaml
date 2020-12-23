@@ -1,14 +1,16 @@
-apiVersion: v1
-appVersion: 0.0.1
+apiVersion: v2
+appVersion: 1.5.5
 description: Mosquitto MQTT Broker with Auth Plug
-engine: gotpl
 icon: null
-keywords:
-- mosquitto
-- mqtt
 maintainers:
-- email: levinsonarie@gmail.com
-  name: Arie Lev
+  - email: levinsonarie@gmail.com
+    name: Arie Lev
+    url: https://www.nalkins.cloud
+keywords:
+  - mosquitto
+  - mqtt
 name: mosquitto
-sources: null
+sources:
+  - https://github.com/eclipse/mosquitto
+  - https://github.com/ArieLevs/docker-images/tree/master/images/mosquitto-centos-based
 version: 0.0.10

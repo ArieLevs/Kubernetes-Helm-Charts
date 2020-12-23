@@ -20,8 +20,17 @@ spec:
         app.kubernetes.io/name: {{ include "nalkinscloud-mqtt-simulators.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
-    {{- with .Values.dependantContainers }}
+
       initContainers:
+        - name: init-mosquitto
+          image: busybox
+          command: ['sh', '-c', 'until nc -z ${mosquitto_host} ${mosquitto_port} ; do echo waiting for mosquitto; sleep 2; done;']
+          env:
+            - name: mosquitto_host
+              value: {{ .Values.envVars.broker_host }}
+            - name: mosquitto_port
+              value: {{ .Values.envVars.broker_port }}
+    {{- with .Values.additionalInitContaners }}
         {{- toYaml . | nindent 8 }}
     {{- end }}
       containers:

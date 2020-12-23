@@ -1,0 +1,25 @@
+
+deployment:
+  replicaCount: 1
+  image:
+    privateRepo: true
+    repository: docker.nalkins.cloud/nalkinscloud/nalkinscloud-django-backend
+    tag: 0.0.46
+  env:
+    environment: ci
+    backend_domain: https://alpha.api.nalkins.cloud
+    frontend_domain: https://alpha.nalkins.cloud
+    # allowed_hosts passed as as string separated by ','
+    allowed_hosts: "*"
+
+configmap:
+  databaseVars:
+    # update below value dynamically in CI with db host
+    db_host: nalkinscloud-api-nalkinscloud-db.e2etest.svc.cluster.local
+
+ingress:
+  enabled: false
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - api.ci.nalkins.cloud

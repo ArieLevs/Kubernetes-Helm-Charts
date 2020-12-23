@@ -25,7 +25,7 @@ dependantContainers:
 
 envVars:
   environment: alpha
-  broker_host: mosquitto.mosquitto.svc.cluster.local
+  broker_host: mosquitto.alpha.nalkins.cloud
   broker_port: 1883
   #broker_tls: True
   dht_user: test_dht_simulator

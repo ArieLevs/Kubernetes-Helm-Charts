@@ -12,16 +12,16 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
-dependantContainers:
+additionalInitContaners: []
   ## Specify dependant container here as example below
-  - name: init-mosquitto
-    image: busybox
-    command: ['sh', '-c', 'until nc -z ${mosquitto_host} ${mosquitto_port} ; do echo waiting for mosquitto; sleep 2; done;']
-    env:
-      - name: mosquitto_host
-        value: "mosquitto.mosquitto.svc.cluster.local"
-      - name: mosquitto_port
-        value: "1883"
+  # - name: init-mosquitto
+  #   image: busybox
+  #   command: ['sh', '-c', 'until nc -z ${mosquitto_host} ${mosquitto_port} ; do echo waiting for mosquitto; sleep 2; done;']
+  #   env:
+  #     - name: mosquitto_host
+  #       value: "mosquitto.mosquitto.svc.cluster.local"
+  #     - name: mosquitto_port
+  #       value: "1883"
 
 envVars:
   environment: alpha

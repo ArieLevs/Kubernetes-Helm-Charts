@@ -28,6 +28,9 @@ vault:
     dev:
       enabled: true
 
+mosquitto:
+  enabled: false
+
 simulators:
   enabled: false
 
@@ -56,15 +59,16 @@ vaultAgent:
   enabled: false
   vaultRoleName: kube-agent-nalkinscloud-django-backend
 
-dependantServices:
-  - name: init-database
-    image: busybox
-    command: ['sh', '-c', 'env; until nc -z ${db_host} ${db_port} ; do echo waiting for database; sleep 2; done;']
-    env:
-      - name: db_host
-        value: "mysql.mysql.svc.cluster.local"
-      - name: db_port
-        value: "3306"
+additionalInitContaners: []
+  ## example
+  # - name: init-database
+  #   image: busybox
+  #   command: ['sh', '-c', 'env; until nc -z ${db_host} ${db_port} ; do echo waiting for database; sleep 2; done;']
+  #   env:
+  #     - name: db_host
+  #       value: "mysql.mysql.svc.cluster.local"
+  #     - name: db_port
+  #       value: "3306"
 
 secrets:
   # If blank, random 50 char secret created

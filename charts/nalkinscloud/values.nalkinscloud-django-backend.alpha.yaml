@@ -1,7 +1,4 @@
 
-tags:
-  e2e-test: false
-
 deployment:
   ## Add annotations on pod level
   annotations:
@@ -33,26 +30,18 @@ deployment:
     privateRepo: true
     repository: docker.nalkins.cloud/nalkinscloud/nalkinscloud-django-backend
     tag: 0.0.46
-    imagePullPolicy: IfNotPresent
   env:
     environment: alpha
     backend_domain: https://alpha.api.nalkins.cloud
     frontend_domain: https://alpha.nalkins.cloud
-    email_host: smtp.gmail.com
-    email_port: 587
-    static_url: https://nalkins.cloud/
     # allowed_hosts passed as as string separated by ','
     allowed_hosts: "10.*"
     graylog_host: graylog.nalkins.cloud
-    graylog_port: 12201
-
-dependantServices: []
 
 configmap:
   databaseVars:
     # Key also used as env name inside project
-    db_name: django
-    db_host: nalkinscloud-api-nalkinscloud-db.e2etest.svc.cluster.local
+    db_host: centraldb.alpha.nalkins.cloud
 
 ingress:
   enabled: true
@@ -61,7 +50,6 @@ ingress:
     ingress.kubernetes.io/ssl-redirect: true
     kubernetes.io/tls-acme: true
     cert-manager.io/cluster-issuer: letsencrypt-production
-  path: /
   hosts:
     - api.alpha.nalkins.cloud
   tls:
