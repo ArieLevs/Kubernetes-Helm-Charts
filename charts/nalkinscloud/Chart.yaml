@@ -28,7 +28,7 @@ dependencies:
   repository: https://arielevs.github.io/Kubernetes-Helm-Charts/
   tags:
   - e2e-test
-  version: 0.1.9
+  version: 0.1.10
 description: Open source IOT framwork
 home: https://www.nalkins.cloud
 icon: null

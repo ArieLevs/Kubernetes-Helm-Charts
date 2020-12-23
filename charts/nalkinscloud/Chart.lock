@@ -10,6 +10,6 @@ dependencies:
   version: 0.0.11
 - name: nalkinscloud-mqtt-simulators
   repository: https://arielevs.github.io/Kubernetes-Helm-Charts/
-  version: 0.1.9
-digest: sha256:e10be9a12f73cc295659f40e389dc37e34cdfb59870c05c2d342935d1b9534d5
-generated: "2020-12-23T18:27:05.394709+02:00"
+  version: 0.1.10
+digest: sha256:b1fe4889b3dde671d5de826d0bef542a56fce4f237205ea882e7eb274efe878a
+generated: "2020-12-23T19:07:32.752817+02:00"
