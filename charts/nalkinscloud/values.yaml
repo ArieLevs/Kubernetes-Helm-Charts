@@ -59,7 +59,7 @@ vaultAgent:
   enabled: false
   vaultRoleName: kube-agent-nalkinscloud-django-backend
 
-additionalInitContaners: []
+additionalInitContainers: []
   ## example
   # - name: init-database
   #   image: busybox

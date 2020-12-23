@@ -27,12 +27,13 @@ spec:
           command: ['sh', '-c', 'until nc -z ${mosquitto_host} ${mosquitto_port} ; do echo waiting for mosquitto; sleep 2; done;']
           env:
             - name: mosquitto_host
-              value: {{ .Values.envVars.broker_host }}
+              value: "{{ .Values.envVars.broker_host }}"
             - name: mosquitto_port
-              value: {{ .Values.envVars.broker_port }}
-    {{- with .Values.additionalInitContaners }}
+              value: "{{ .Values.envVars.broker_port }}"
+    {{- with .Values.additionalInitContainers }}
         {{- toYaml . | nindent 8 }}
     {{- end }}
+
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
