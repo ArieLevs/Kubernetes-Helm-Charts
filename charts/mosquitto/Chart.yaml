@@ -2,15 +2,15 @@ apiVersion: v2
 appVersion: 1.5.5
 description: Mosquitto MQTT Broker with Auth Plug
 icon: null
-maintainers:
-  - email: levinsonarie@gmail.com
-    name: Arie Lev
-    url: https://www.nalkins.cloud
 keywords:
-  - mosquitto
-  - mqtt
+- mosquitto
+- mqtt
+maintainers:
+- email: levinsonarie@gmail.com
+  name: Arie Lev
+  url: https://www.nalkins.cloud
 name: mosquitto
 sources:
-  - https://github.com/eclipse/mosquitto
-  - https://github.com/ArieLevs/docker-images/tree/master/images/mosquitto-centos-based
-version: 0.0.10
+- https://github.com/eclipse/mosquitto
+- https://github.com/ArieLevs/docker-images/tree/master/images/mosquitto-centos-based
+version: 0.0.11
