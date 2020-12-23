@@ -7,9 +7,9 @@ dependencies:
   version: 0.8.0
 - name: mosquitto
   repository: https://arielevs.github.io/Kubernetes-Helm-Charts/
-  version: 0.0.10
+  version: 0.0.11
 - name: nalkinscloud-mqtt-simulators
   repository: https://arielevs.github.io/Kubernetes-Helm-Charts/
-  version: 0.1.8
-digest: sha256:6295e1c6a83472ee6b6226c25880dd4aa9cf905b9dbf4159c14599fcfccf03bb
-generated: "2020-12-23T10:44:06.185137+02:00"
+  version: 0.1.9
+digest: sha256:e10be9a12f73cc295659f40e389dc37e34cdfb59870c05c2d342935d1b9534d5
+generated: "2020-12-23T18:27:05.394709+02:00"
