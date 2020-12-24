@@ -13,4 +13,4 @@ name: mosquitto
 sources:
 - https://github.com/eclipse/mosquitto
 - https://github.com/ArieLevs/docker-images/tree/master/images/mosquitto-centos-based
-version: 0.0.11
+version: 0.0.12
