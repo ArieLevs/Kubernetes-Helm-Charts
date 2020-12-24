@@ -10,6 +10,55 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
   mosquitto.conf: |-
-{{- if .Values.config }}
-{{ .Values.config | indent 4 }}
+    allow_anonymous true
+
+    connection_messages true
+    log_timestamp true
+    log_type all
+    log_dest stdout
+
+    listener {{ .Values.service.mqttPort }} 127.0.0.1
+    listener {{ .Values.service.mqttTLSPort }}
+{{- if .Values.config.webSockets.enabled }}
+    protocol websockets
+    listener {{ .Values.service.websocketPort }}
+{{- end }}
+
+{{- if .Values.tls.enabled }}
+    tls_version {{ .Values.tls.tlsVersion }}
+    cafile /mosquitto/certs/ca.crt
+    keyfile /mosquitto/certs/server.key
+    certfile /mosquitto/certs/server.crt
+{{- end }}
+
+    #use_identity_as_username true
+{{- if .Values.config.authPlug.enabled }}
+    ### Auth plug parameters - MYSQL back end ####
+    auth_plugin /mosquitto/config/auth-plug.so
+
+    auth_opt_backends mysql
+    ##auth_opt_redis_host
+    ##auth_opt_redis_port
+    auth_opt_host {{ .Values.config.authPlug.dbHost }}
+    auth_opt_port {{ .Values.config.authPlug.dbPort }}
+    auth_opt_dbname {{ .Values.config.authPlug.dbName }}
+    auth_opt_user {{ .Values.config.authPlug.dbUser }}
+    auth_opt_pass {{ .Values.config.authPlug.dbPass }}
+    auth_opt_userquery SELECT password FROM devices WHERE device_id = '%s'
+    auth_opt_superquery SELECT COUNT(*) FROM devices WHERE device_id = '%s' AND super = 1
+    auth_opt_aclquery SELECT topic FROM access_list WHERE (device_id = '%s') AND (rw >= '%d')
+    auth_opt_anonusername AnonymouS
+
+    auth_opt_mysql_opt_reconnect true
+    auth_opt_mysql_auto_reconnect true
+    ### END Auth plug parameters ####
+{{- end }}
+
+    max_inflight_messages 1
+
+    #Allow multiple connections for same client
+    use_username_as_clientid true
+
+{{- if .Values.config.addtionalConfigs }}
+{{ .Values.config.addtionalConfigs | indent 4 }}
 {{- end -}}

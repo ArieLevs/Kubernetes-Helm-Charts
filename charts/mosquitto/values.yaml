@@ -22,69 +22,46 @@ dependantServices: {}
   ##  image: busybox
   ##  command: ['sh', '-c', 'until nc -z mysql.mysql.svc.cluster.local:3306 ; do echo waiting for mysql; sleep 2; done;']
 
-## Mosquitto certificates path must be:
-##  cafile /mosquitto/certs/ca.crt
-##  keyfile /mosquitto/certs/server.key
-##  certfile /mosquitto/certs/server.crt
-config: |-
-  allow_anonymous true
-
-  connection_messages true
-  log_timestamp true
-  log_type all
-  log_dest stdout
-
-  listener 1883 127.0.0.1
-  listener 8883
-  #listener 9090
-  #protocol websockets
-
-  #cafile /mosquitto/certs/ca.crt
-  #keyfile /mosquitto/certs/server.key
-  #certfile /mosquitto/certs/server.crt
-  #tls_version tlsv1.1
-  #use_identity_as_username true
-
-  max_inflight_messages 1
-
-  ### Auth plug parameters - MYSQL back end ####
-  auth_plugin /mosquitto/config/auth-plug.so
-
-  auth_opt_backends mysql
-  ##auth_opt_redis_host
-  ##auth_opt_redis_port
-  auth_opt_host $DB_MOSQUITTO_LOCATION
-  auth_opt_port 3306
-  auth_opt_dbname mosquitto
-  auth_opt_user mosquitto
-  auth_opt_pass $DB_MOSQUITTO_PASS
-  auth_opt_userquery SELECT password FROM devices WHERE device_id = '%s'
-  auth_opt_superquery SELECT COUNT(*) FROM devices WHERE device_id = '%s' AND super = 1
-  auth_opt_aclquery SELECT topic FROM access_list WHERE (device_id = '%s') AND (rw >= '%d')
-  auth_opt_anonusername AnonymouS
-
-  auth_opt_mysql_opt_reconnect true
-  auth_opt_mysql_auto_reconnect true
-  ### END Auth plug parameters ####
-
-  #Allow multiple connections for same client
-  use_username_as_clientid true
+config:
+  authPlug:
+    # set mysql backend values
+    enabled: true
+    dbHost: centraldb.alpha.nalkins.cloud
+    dbPort: 3306
+    dbName: django
+    dbUser: django
+    dbPass: django
+  webSockets:
+    enabled: false
+    port: 9090
+  addtionalConfigs: ""
+    ## add additional configs from https://mosquitto.org/man/mosquitto-conf-5.html
+    ## for example
+    # |-
+    #allow_anonymous true
+    #
+    #connection_messages true
+    #log_timestamp true
+    #log_type all
+    #log_dest stdout
 
 tls:
   enabled: false
+  # possible values are tlsv1.3, tlsv1.2 and tlsv1.1
+  tlsVersion: tlsv1.2
   certificates:
-#   ca: |-
-#     -----BEGIN CERTIFICATE-----
-#     ...
-#     -----END CERTIFICATE-----
-#   cert: |-
-#     -----BEGIN CERTIFICATE-----
-#     ...
-#     -----END CERTIFICATE-----
-#   key: |-
-#     -----BEGIN RSA PRIVATE KEY-----
-#     ...
-#     -----END RSA PRIVATE KEY-----
+   ca: |-
+     -----BEGIN CERTIFICATE-----
+     ...
+     -----END CERTIFICATE-----
+   cert: |-
+     -----BEGIN CERTIFICATE-----
+     ...
+     -----END CERTIFICATE-----
+   key: |-
+     -----BEGIN RSA PRIVATE KEY-----
+     ...
+     -----END RSA PRIVATE KEY-----
 
 persistence:
   enabled: false
