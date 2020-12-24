@@ -9,7 +9,7 @@ helm dependency update
 
 Installing on localhost:
 ```shell script
-helm upgrade nalkinscloud-api \
+helm upgrade nalkinscloud-django-backend \
   --install nalkinscloud/nalkinscloud \
   --namespace nalkinscloud-api \
   --set deployment.env.environment=dev \
@@ -40,7 +40,7 @@ helm upgrade nalkinscloud-resume \
 ### Executing chart in CI environment:
 * the `tags.e2e-test=true` will deploy all dependency chart needed in CI env
 ```shell script
-helm upgrade nalkinscloud-api \
+helm upgrade nalkinscloud-django-backend \
   --install nalkinscloud/nalkinscloud \
   --namespace e2etest \
   -f values.nalkinscloud-django-backend.ci.yaml \

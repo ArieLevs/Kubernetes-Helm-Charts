@@ -21,7 +21,7 @@ dependencies:
   repository: https://arielevs.github.io/Kubernetes-Helm-Charts/
   tags:
   - e2e-test
-  version: 0.0.11
+  version: 0.0.12
 - alias: simulators
   condition: simulators.enabled
   name: nalkinscloud-mqtt-simulators
