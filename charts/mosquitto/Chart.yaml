@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 1.5.5
+appVersion: 2.0.7
 description: Mosquitto MQTT Broker with Auth Plug
 icon: null
 keywords:
@@ -13,4 +13,4 @@ name: mosquitto
 sources:
 - https://github.com/eclipse/mosquitto
 - https://github.com/ArieLevs/docker-images/tree/master/images/mosquitto-centos-based
-version: 0.0.12
+version: 0.1.0
