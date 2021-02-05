@@ -6,7 +6,7 @@ A mosquitto service must be up and reachable, below values must be reachable.
 ```yaml
 envVars:
   broker_host: mosquitto.mosquitto.svc.cluster.local
-  broker_port: 1883
+  broker_port: 8883
 ```
 Install
 ```shell script

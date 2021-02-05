@@ -21,12 +21,12 @@ dependantContainers:
       - name: mosquitto_host
         value: "mosquitto.mosquitto.svc.cluster.local"
       - name: mosquitto_port
-        value: "1883"
+        value: "8883"
 
 envVars:
   environment: alpha
   broker_host: mosquitto.alpha.nalkins.cloud
-  broker_port: 1883
+  broker_port: 8883
   #broker_tls: True
   dht_user: test_dht_simulator
   dht_topic: test_dht_simulator
