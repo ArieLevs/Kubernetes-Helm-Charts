@@ -17,7 +17,7 @@ data:
     log_type {{ .Values.config.logType }}
     log_dest {{ .Values.config.logDest }}
 
-    listener {{ .Values.service.mqttPort }} 127.0.0.1
+    listener {{ .Values.service.mqttPort }}
     listener {{ .Values.service.mqttTLSPort }}
 {{- if .Values.config.webSockets.enabled }}
     protocol websockets
