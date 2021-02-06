@@ -18,17 +18,19 @@ data:
     log_dest {{ .Values.config.logDest }}
 
     listener {{ .Values.service.mqttPort }}
-    listener {{ .Values.service.mqttTLSPort }}
 {{- if .Values.config.webSockets.enabled }}
     protocol websockets
     listener {{ .Values.service.websocketPort }}
 {{- end }}
 
 {{- if .Values.tls.enabled }}
+    listener {{ .Values.service.mqttTLSPort }}
+    protocol mqtt
     tls_version {{ .Values.tls.tlsVersion }}
     cafile /mosquitto/certs/ca.crt
     keyfile /mosquitto/certs/server.key
     certfile /mosquitto/certs/server.crt
+    require_certificate {{ .Values.tls.requireClientCertificate }}
 {{- end }}
 
     #use_identity_as_username true

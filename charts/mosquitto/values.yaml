@@ -53,22 +53,84 @@ config:
     #log_dest stdout
 
 tls:
-  enabled: false
+  enabled: true
   # possible values are tlsv1.3, tlsv1.2 and tlsv1.1
   tlsVersion: tlsv1.2
   certificates:
    ca: |-
      -----BEGIN CERTIFICATE-----
-     ...
+     MIIDZjCCAk4CCQDOQsKm3+5xtDANBgkqhkiG9w0BAQsFADB1MQswCQYDVQQGEwJp
+     bDEMMAoGA1UECAwDdGx2MQwwCgYDVQQHDAN0bHYxFTATBgNVBAoMDG5hbGtpbnNj
+     bG91ZDEVMBMGA1UECwwMbmFsa2luc2Nsb3VkMRwwGgYDVQQDDBNtb3NxdWl0dG8u
+     bG9jYWxob3N0MB4XDTIxMDIwNjEzMzg0NVoXDTMxMDIwNDEzMzg0NVowdTELMAkG
+     A1UEBhMCaWwxDDAKBgNVBAgMA3RsdjEMMAoGA1UEBwwDdGx2MRUwEwYDVQQKDAxu
+     YWxraW5zY2xvdWQxFTATBgNVBAsMDG5hbGtpbnNjbG91ZDEcMBoGA1UEAwwTbW9z
+     cXVpdHRvLmxvY2FsaG9zdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
+     AOOSe3ZqYN2HHgpr5d+SIOwQQJ2WBw1J5OePAuukXigqujmbJcnungSXmQPbG92z
+     Dtp7o006fRoyxAtlQSoHpvyvyykcaJDUikzLKhbdf2zh8+nQSsXZEIBoQ1QCDUrC
+     q38vl2q0AioMrvAOTVRrXpQI/TQh2bqSNinQGMJUQpp20f9sS6PVyuxgGDvkxQ1+
+     2hE/6RYEm/z6hjsQjDehkN1dMjWQ+O1YqIBs5wLUtjub6gW4H9ARoP8ECZAcqThX
+     ukIZCpgszUvS+uvafj4SNZU3HozZBmKhn4CwYMmIqdWEHYSe/pcy7dV87pQj7g+L
+     4ZAOg63Mc+J3dWWcPiS8ORUCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAe1xdtD3u
+     dHQTrblIXwtfiFtioHuvipP9scr8F6CziVHJ4OiZDnsVMYWJhMyV3tNTRQ/iD/sp
+     ha5orjDsWZW54Mwd/b3naLpqu0r4diNykk0C1ZRYIsrwzFu3Qc2jBa4sQhpdXuCr
+     uY3ftqzb0BOIS3ZXu5m7tkjFCxdKrq6zT2Ruaysrh7u+gjL8osGkwn95peTqzuq9
+     USaxZuUHoG+6Er7AFHiY0R+ris0acpnl7lkipbrKxYL6ssWta/mcg8PEOi4m45vY
+     o4/ew/WUVjTxeBLJ8B7iZDnp4nFxlTKp3QfHKUq6W1uYDQmvcGQTPCilPKA9n7v+
+     Fg/flGQCW4KRbQ==
      -----END CERTIFICATE-----
    cert: |-
      -----BEGIN CERTIFICATE-----
-     ...
+     MIIDZjCCAk4CCQDsGccpUF9HDDANBgkqhkiG9w0BAQUFADB1MQswCQYDVQQGEwJp
+     bDEMMAoGA1UECAwDdGx2MQwwCgYDVQQHDAN0bHYxFTATBgNVBAoMDG5hbGtpbnNj
+     bG91ZDEVMBMGA1UECwwMbmFsa2luc2Nsb3VkMRwwGgYDVQQDDBNtb3NxdWl0dG8u
+     bG9jYWxob3N0MB4XDTIxMDIwNjEzMzkwMFoXDTMxMDIwNDEzMzkwMFowdTELMAkG
+     A1UEBhMCaWwxDDAKBgNVBAgMA3RsdjEMMAoGA1UEBwwDdGx2MRUwEwYDVQQKDAxu
+     YWxraW5zY2xvdWQxFTATBgNVBAsMDG5hbGtpbnNjbG91ZDEcMBoGA1UEAwwTbW9z
+     cXVpdHRvLmxvY2FsaG9zdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
+     ALQt63sYaQBc9Deh+67Xcce2H6g4XsLyjvhxZmtBDsgGMwe7KY9+h2eJFFbSoygw
+     QHceqRZTfv2txXiw6DJnvY6C4M7+zFFlRlqcDY+paBI7mgKTBEydi57IHsmZYg3S
+     aZakQTZb2eDYbE4GpBZrsMuEfAWBwmBUNEERFmXkWFnpjEHciIHQtRXZpzjf/Z0d
+     +arhjT92q3gD0gOUZ21eUrFhC7kGQQtb9cNYyH0AQgUoWk6F1quuA0d4q7tWWrka
+     txb7BqrmGZSD9ALV9l8z4P7WL59Rq0+3i9V5z3+C5ES3VMbpgBsaSiCKtJWOZtIr
+     PxIsJC+0OdRIFlpWYdRMwdUCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARolbiG0y
+     AMWV2GrVes0SZquYuESuGLdiYL/py5vqmFHj5QzURbhXGyL7MWRyfJ2wfg/+ohD6
+     AGEQhPxJiwdsEDQkNT2srZj60Zm9Q15XlIl7DLhvE9EEXePtXscbD/WRmQZfi8i6
+     lOJ7a+82ngRii+WCLnkpFcy5ufVo0QdKzeVUmYKjFKPNlAR0AXS8Zt13d+n7iXWb
+     zY6o+DkUrAQxDhkqB3kLv6IRL65AmpC1+8drMyhhLE3ofBK05Ayh8f5VLOOVxeUx
+     13p/iwGM2RtCyiE7WBex8DqEnk2Kfl1WKtg9LEEOsOUNOu9/GmwpIBqJTcAqkwnc
+     jZHfynBRcv4Adw==
      -----END CERTIFICATE-----
    key: |-
      -----BEGIN RSA PRIVATE KEY-----
-     ...
+     MIIEpQIBAAKCAQEAtC3rexhpAFz0N6H7rtdxx7YfqDhewvKO+HFma0EOyAYzB7sp
+     j36HZ4kUVtKjKDBAdx6pFlN+/a3FeLDoMme9joLgzv7MUWVGWpwNj6loEjuaApME
+     TJ2LnsgeyZliDdJplqRBNlvZ4NhsTgakFmuwy4R8BYHCYFQ0QREWZeRYWemMQdyI
+     gdC1FdmnON/9nR35quGNP3areAPSA5RnbV5SsWELuQZBC1v1w1jIfQBCBShaToXW
+     q64DR3iru1ZauRq3FvsGquYZlIP0AtX2XzPg/tYvn1GrT7eL1XnPf4LkRLdUxumA
+     GxpKIIq0lY5m0is/EiwkL7Q51EgWWlZh1EzB1QIDAQABAoIBACI2+hmE+CN+g02x
+     L9byyINxHS/XjH8einG5Lwa88u6e5r/YFbtO/q11hWw7UYpHJ2a3Zsp7jojjn7Uc
+     eutfccqHJeOI1Qm73pFEQvr942pa8RL+EfnujN3ZCKelvc38H9rgVBXbeVNOJbrn
+     Xe94AbmT7e0px9x9APM+KG+u3ewssFt63WoXWk+qtdM1QLJSMNyyJkL9xWZ3EjmE
+     EFSSj1qPxpdf0m567jF/eseWmuRz86huesVLuJXS2e7pjqK603hiSE+8V63OWa/C
+     VGp7gu0K+KaTBbLgycXbTN8uXEm7cg87VDryZODVSl2dAZqpIrOqC8GAD6g7S99n
+     Ca2F+MECgYEA7faxgfpHFq/6QLn8WcUhDUkdUNHfUCqy+eTEsvgYIenIKXjuSlhg
+     zRUh082+smCG7Q683/0BtdLLEP009Fw1PTcKsr1B8aL4xp77gEdkjmMAz+Q7D7zq
+     yk8a+qqpElLPWWvYp+odTvurf/Xv9jaKA04HouQ1XtPUviDp0ef6onECgYEAwdYD
+     smWfIJFWc850UHrt5zNRbtKsjonN0QLur/CoiifyYggCiH8oEjAqUd4bmT+SI/1c
+     KXm8KjUQrVKeb8yAoqQlOIxun38ML3cl7k+ZPALKf5qX+FPyaDxQqfPdzRahSQlf
+     T73SV4rGVOvTMuH3OzcDdc4pxcmcTGHDwknsf6UCgYEA3JqarPis9qdlxKOnAkHy
+     BjMF7mriL5umGGywvYmqNaZZXbkyj9Gmy/kPRx+x7gP2kcXb63rOHxWwE6vpb7Ab
+     2wgv7svtWmnPX7L7TUziN+4oTpIy/sAQmkUDqeaUntwORcPpMqGjUhmWQCZrs0GU
+     aMPp6GTP5X1T+H7ixSnd/MECgYEAqexfmUiU0wwV6beXJ+ZcIE5QmQJ+2wXbM9uK
+     OxqR5WtXhLDY56fxDODEeLhpIVMlXf+Bh6p8VdPnJspCsmdobSvQpV4WrCPIHuQo
+     kF2fS4h21J5FkyCkZNRbMmHikyO/iDN7JoCVoMC7VT7XCsgk3/g+REvTOtye9CbQ
+     YcZEWTECgYEAq3/rLz3DlxWSucjEZRG9axfmVLyGzLo5UKaLtc1yuz/hIFY6irva
+     l9ZB9xcJclnN4Vd1rt3bSaciRM1g8T92VqVtOPZrBS9T/6bgxrE6D/IF9oXvXUoq
+     QjaPKKKhkhj7wkMNrC/yEVAL+P2Cf+KFFsBeLcqn+Xpc0HZua8SaaXg=
      -----END RSA PRIVATE KEY-----
+  ## a client connecting to this listener must provide a valid certificate in order for the network connection to proceed
+  requireClientCertificate: false
 
 persistence:
   enabled: false
