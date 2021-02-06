@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: docker.nalkins.cloud/nalkinscloud-mqtt-automation-simulators/nalkinscloud-mqtt-automation-simulators
-  tag: 0.1.19
+  tag: 0.1.20
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -27,7 +27,8 @@ envVars:
   environment: alpha
   broker_host: mosquitto.alpha.nalkins.cloud
   broker_port: 8883
-  #broker_tls: True
+  broker_tls: True
+  broker_tls_skip: True
   dht_user: test_dht_simulator
   dht_topic: test_dht_simulator
   dht_qos: 1
