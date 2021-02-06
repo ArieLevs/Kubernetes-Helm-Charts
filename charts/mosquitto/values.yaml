@@ -24,6 +24,10 @@ dependantServices: {}
   ##  command: ['sh', '-c', 'until nc -z mysql.mysql.svc.cluster.local:3306 ; do echo waiting for mysql; sleep 2; done;']
 
 config:
+  ## server configurations documented here: https://mosquitto.org/man/mosquitto-conf-5.html
+  logType: "debug"
+  logDest: "stdout"
+
   ## mosquitto-auth-plug https://github.com/jpmens/mosquitto-auth-plug repo has been archived,
   ##  latest mosquitto version that can work with auth plug is `arielev/mosquitto:1.5.5`
   authPlug:
