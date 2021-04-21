@@ -38,51 +38,11 @@ deployment:
     environment: alpha
     backend_domain: https://resume.alpha.nalkins.cloud
     frontend_domain: https://resume.alpha.nalkins.cloud
-    email_host: smtp.gmail.com
-    email_port: 587
-    static_url: https://nalkins.cloud/
     allowed_hosts: "resume.alpha.nalkins.cloud,10.*"
 
 vaultAgent:
   enabled: false
   vaultRoleName: kube-agent-nalkinscloud-resume
-
-dependantServices:
-  - name: init-database
-    image: busybox
-    command: ['sh', '-c', 'env; until nc -z ${db_host} ${db_port} ; do echo waiting for database; sleep 2; done;']
-    env:
-      - name: db_host
-        value: "centraldb.alpha.nalkins.cloud"
-      - name: db_port
-        value: "3306"
-
-secrets:
-  # If blank, random 50 char secret created
-  ## NOTE - If using Argo CD this value must ve set or the app will always be in 'OutOfSync' state
-  django_secret_key:
-
-  docker:
-    dockerSecretName: nalkinscloud-nexus-docker
-    registry: docker.nalkins.cloud
-    username: admin
-    password: admin
-  database:
-    username: django
-    password: django
-  email:
-    username: admin
-    password: admin
-
-configmap:
-  databaseVars:
-    # Key also used as env name inside project
-    db_name: django
-    db_host: centraldb.alpha.nalkins.cloud
-
-service:
-  type: ClusterIP
-  port: 80
 
 ingress:
   enabled: true
@@ -98,17 +58,3 @@ ingress:
     - secretName: nalkinscloud-resume-tls
       hosts:
         - resume.alpha.nalkins.cloud
-
-resources: {}
-  # limits:
-  #  cpu: 100m
-  #  memory: 128Mi
-  # requests:
-  #  cpu: 100m
-  #  memory: 128Mi
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
