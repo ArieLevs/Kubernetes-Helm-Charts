@@ -43,7 +43,7 @@ deployment:
 configmap:
   databaseVars:
     # Key also used as env name inside project
-    db_name: django
+    db_name: nalkinscloud_resume
     db_host: centraldb.alpha.nalkins.cloud
 
 vaultAgent:
