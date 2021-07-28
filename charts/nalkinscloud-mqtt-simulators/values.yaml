@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: docker.nalkins.cloud/nalkinscloud-mqtt-automation-simulators/nalkinscloud-mqtt-automation-simulators
-  tag: 0.1.19
+  tag: 0.1.21
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -25,14 +25,13 @@ additionalInitContainers: []
 
 envVars:
   environment: alpha
-  broker_host: mosquitto.mosquitto.svc.cluster.local
+  broker_host: thingsboard-mqtt-transport.thingsboard.svc.cluster.local
   broker_port: 1883
   #broker_tls: True
+  broker_tls_skip: True
   dht_user: test_dht_simulator
-  dht_topic: test_dht_simulator
   dht_qos: 1
   switch_user: test_switch_simulator
-  switch_topic: test_switch_simulator
   switch_qos: 1
 
 graylog:
@@ -64,4 +63,3 @@ resources: {}
   # requests:
   #  cpu: 100m
   #  memory: 128Mi
-
