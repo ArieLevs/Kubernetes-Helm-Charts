@@ -12,6 +12,8 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+podAnnotations: {}
+
 additionalInitContainers: []
   ## Specify dependant container here as example below
   # - name: init-mosquitto
@@ -45,10 +47,14 @@ serverCrt: |-
 secrets:
   docker:
     privateRepo: true
+    ## if true credentials will be fetched from vault, local registry/username/password ignored
+    vaultSecret: false
     registry: docker.nalkins.cloud
     username: username
     password: passowrd
   devices:
+    ## if true credentials will be fetched from vault, local password ignored
+    vaultSecret: false
     dht_pass: nalkinscloud
     switch_pass: nalkinscloud
 

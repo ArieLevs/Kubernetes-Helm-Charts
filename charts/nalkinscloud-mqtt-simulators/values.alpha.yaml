@@ -12,22 +12,43 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+podAnnotations:
+  vault.hashicorp.com/log-level: "debug"
+  ## Annotations docs here: https://www.vaultproject.io/docs/platform/k8s/injector/annotations/
+  vault.hashicorp.com/agent-inject: "false"
+  vault.hashicorp.com/agent-inject-status: "update"
+  vault.hashicorp.com/role: "nalkinscloud-mqtt-simulators"
+  vault.hashicorp.com/agent-inject-secret-dht-password: "secret/data/nalkinscloud-simulators/devices/dht"
+  vault.hashicorp.com/agent-inject-secret-switch-password: "secret/data/nalkinscloud-simulators/devices/switch"
+
+  ## This should map to the same unique value provided in vault.hashicorp.com/agent-inject-secret-X
+  ## Deployment template example can be found here:
+  ## https://www.vaultproject.io/docs/platform/k8s/injector/examples/#deployments-statefulsets-etc
+  vault.hashicorp.com/agent-inject-template-dht-password: |
+    {{- with secret "secret/data/nalkinscloud-simulators/devices/dht" -}}
+    dht_pass: {{ .Data.data.password }}
+    {{- end -}}
+  vault.hashicorp.com/agent-inject-template-switch-password: |
+    {{- with secret "secret/data/nalkinscloud-simulators/devices/switch" -}}
+    switch_pass: {{ .Data.data.password }}
+    {{- end -}}
+
 dependantContainers:
   ## Specify dependant container here as example below
-  - name: init-mosquitto
+  - name: init-mqtt-broker
     image: busybox
-    command: ['sh', '-c', 'until nc -z ${mosquitto_host} ${mosquitto_port} ; do echo waiting for mosquitto; sleep 2; done;']
+    command: ['sh', '-c', 'until nc -z ${broker_host} ${broker_port} ; do echo waiting for mosquitto; sleep 2; done;']
     env:
-      - name: mosquitto_host
-        value: "mosquitto.mosquitto.svc.cluster.local"
-      - name: mosquitto_port
-        value: "8883"
+      - name: broker_host
+        value: "thingsboard-mqtt-transport.thingsboard.svc.cluster.local"
+      - name: broker_port
+        value: "1883"
 
 envVars:
   environment: alpha
   broker_host: thingsboard.nalkins.cloud
   broker_port: 1883
-  broker_tls: True
+  broker_tls: false
   broker_tls_skip: True
   dht_user: test_dht_simulator
   dht_qos: 1
@@ -45,12 +66,14 @@ serverCrt: |-
 secrets:
   docker:
     privateRepo: true
+    ## if true credentials will be fetched from vault, local registry/username/password ignored
+    vaultSecret: true
     registry: docker.nalkins.cloud
     username: username
     password: passowrd
   devices:
-    dht_pass: nalkinscloud
-    switch_pass: nalkinscloud
+    ## if true credentials will be fetched from vault, local password ignored, else from external secrets
+    vaultSecret: false
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

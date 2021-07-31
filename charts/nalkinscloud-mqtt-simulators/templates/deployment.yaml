@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "nalkinscloud-mqtt-simulators.fullname" . }}
+  name: {{ $fullName }}
   labels:
     app.kubernetes.io/name: {{ include "nalkinscloud-mqtt-simulators.name" . }}
     helm.sh/chart: {{ include "nalkinscloud-mqtt-simulators.chart" . }}
@@ -19,8 +19,12 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "nalkinscloud-mqtt-simulators.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- with .Values.podAnnotations }}
+      annotations:
+    {{- toYaml . | nindent 8 }}
+    {{- end }}
     spec:
-
+      serviceAccountName: nalkinscloud-mqtt-simulators
       initContainers:
         - name: init-mosquitto
           image: busybox
@@ -45,20 +49,16 @@ spec:
               subPath: mosquitto_server.crt
               readOnly: true
           {{- end }}
+
+          {{- if not .Values.secrets.devices.vaultSecret }}
+          envFrom:
+            - secretRef:
+                name: {{ $fullName }}-devices
+          {{- end }}
+
           env:
             - name: version
               value: {{ .Values.image.tag | quote }}
-
-            - name: dht_pass
-              valueFrom:
-                secretKeyRef:
-                  name: {{ $fullName }}
-                  key: dhtPass
-            - name: switch_pass
-              valueFrom:
-                secretKeyRef:
-                  name: {{ $fullName }}
-                  key: switchPass
 
             {{- range $key, $value := .Values.envVars }}
             - name: {{ $key }}
@@ -79,5 +79,5 @@ spec:
             name: {{ $fullName }}
       {{- if .Values.secrets.docker.privateRepo }}
       imagePullSecrets:
-        - name: private-image-pull-secret
+        - name: {{ $fullName }}-registry-secret
       {{- end -}}

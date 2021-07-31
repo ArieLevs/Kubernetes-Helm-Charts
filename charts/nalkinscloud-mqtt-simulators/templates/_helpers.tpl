@@ -32,7 +32,7 @@ Create chart name and version as used by the chart label.
 {{- end -}}
 
 {{- define "imagePullSecret" }}
-{{- if .Values.secrets.docker.privateRepo }}
+{{- if and .Values.secrets.docker.privateRepo (not .Values.secrets.docker.vaultSecret) }}
 {{- printf "{\"auths\": {\"%s\": {\"auth\": \"%s\"}}}" .Values.secrets.docker.registry (printf "%s:%s" .Values.secrets.docker.username .Values.secrets.docker.password | b64enc) | b64enc }}
 {{- end }}
 {{- end }}
