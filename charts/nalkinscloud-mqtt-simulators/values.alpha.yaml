@@ -49,16 +49,11 @@ envVars:
   broker_host: thingsboard.nalkins.cloud
   broker_port: 1883
   broker_tls: false
-  broker_tls_skip: True
+  broker_tls_skip: true
   dht_user: test_dht_simulator
   dht_qos: 1
   switch_user: test_switch_simulator
   switch_qos: 1
-
-graylog:
-  graylog_enabled: false
-  graylog_host: graylog.nalkins.cloud
-  graylog_port: 12201
 
 serverCrt: |-
 # Mosquitto CRT file content goes here

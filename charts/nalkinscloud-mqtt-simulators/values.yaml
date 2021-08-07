@@ -16,30 +16,25 @@ podAnnotations: {}
 
 additionalInitContainers: []
   ## Specify dependant container here as example below
-  # - name: init-mosquitto
-  #   image: busybox
-  #   command: ['sh', '-c', 'until nc -z ${mosquitto_host} ${mosquitto_port} ; do echo waiting for mosquitto; sleep 2; done;']
-  #   env:
-  #     - name: mosquitto_host
-  #       value: "mosquitto.mosquitto.svc.cluster.local"
-  #     - name: mosquitto_port
-  #       value: "1883"
+  #- name: init-mqtt-broker
+  #  image: busybox
+  #  command: ['sh', '-c', 'until nc -z ${broker_host} ${broker_port} ; do echo waiting for mosquitto; sleep 2; done;']
+  #  env:
+  #    - name: broker_host
+  #      value: "thingsboard-mqtt-transport.thingsboard.svc.cluster.local"
+  #    - name: broker_port
+  #      value: "1883"
 
 envVars:
   environment: alpha
   broker_host: thingsboard-mqtt-transport.thingsboard.svc.cluster.local
   broker_port: 1883
   #broker_tls: True
-  broker_tls_skip: True
+  broker_tls_skip: true
   dht_user: test_dht_simulator
   dht_qos: 1
   switch_user: test_switch_simulator
   switch_qos: 1
-
-graylog:
-  graylog_enabled: false
-  graylog_host: graylog.nalkins.cloud
-  graylog_port: 12201
 
 serverCrt: |-
 # Mosquitto CRT file content goes here
@@ -55,8 +50,6 @@ secrets:
   devices:
     ## if true credentials will be fetched from vault, local password ignored
     vaultSecret: false
-    dht_pass: nalkinscloud
-    switch_pass: nalkinscloud
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
