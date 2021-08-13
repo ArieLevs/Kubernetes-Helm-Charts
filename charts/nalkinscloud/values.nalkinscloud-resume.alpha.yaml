@@ -44,7 +44,7 @@ configmap:
   databaseVars:
     # Key also used as env name inside project
     db_name: nalkinscloud_resume
-    db_host: centraldb.alpha.nalkins.cloud
+    db_host: centraldb.nalkins.cloud
 
 vaultAgent:
   enabled: false
