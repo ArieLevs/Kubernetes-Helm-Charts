@@ -1,0 +1,17 @@
+secrets:
+  ## name will be the secrets name created
+  #- name: top-secret
+  #  annotations: {}
+  #  #  first-annotation: i-am-first
+  #  #  second-annotation: second
+  #  ## valid ExternalSecret spec as described here: https://github.com/external-secrets/kubernetes-external-secrets#add-a-secret
+  #  specs:
+  #    backendType: vault
+  #    vaultRole: kubernetes-external-secrets
+  #    kvVersion: 2
+  #    template:
+  #      type: kubernetes.io/dockerconfigjson
+  #    data:
+  #      - name: .dockerconfigjson
+  #        key: secret/data/nexus/docker
+  #        property: dockerconfigjson
